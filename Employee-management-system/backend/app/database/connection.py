@@ -1,0 +1,204 @@
+# employees=[
+#   {
+#     "id": 1,
+#     "name": "John Doe",
+#     "department": "Engineering",
+#     "designation": "Frontend Developer",
+#     "status": "Active",
+#     "email": "john@example.com",
+#     "attendance": "95%"
+#   },
+#   {
+#     "id": 2,
+#     "name": "Sarah Smith",
+#     "department": "HR",
+#     "designation": "HR Manager",
+#     "status": "Inactive",
+#     "email": "sarah@example.com",
+#     "attendance": "88%"
+#   },
+#   {
+#     "id": 3,
+#     "name": "Michael Johnson",
+#     "department": "Finance",
+#     "designation": "Accountant",
+#     "status": "Active",
+#     "email": "michael@example.com",
+#     "attendance": "91%"
+#   },
+#   {
+#     "id": 4,
+#     "name": "Emily Davis",
+#     "department": "Engineering",
+#     "designation": "Backend Developer",
+#     "status": "Active",
+#     "email": "emily@example.com",
+#     "attendance": "97%"
+#   },
+#   {
+#     "id": 5,
+#     "name": "Daniel Brown",
+#     "department": "HR",
+#     "designation": "Recruiter",
+#     "status": "Inactive",
+#     "email": "daniel@example.com",
+#     "attendance": "84%"
+#   },
+#   {
+#     "id": 6,
+#     "name": "Sophia Wilson",
+#     "department": "Finance",
+#     "designation": "Financial Analyst",
+#     "status": "Active",
+#     "email": "sophia@example.com",
+#     "attendance": "93%"
+#   },
+#   {
+#     "id": 7,
+#     "name": "James Taylor",
+#     "department": "Engineering",
+#     "designation": "Full Stack Developer",
+#     "status": "Active",
+#     "email": "james@example.com",
+#     "attendance": "96%"
+#   },
+#   {
+#     "id": 8,
+#     "name": "Olivia Martinez",
+#     "department": "HR",
+#     "designation": "HR Executive",
+#     "status": "Active",
+#     "email": "olivia@example.com",
+#     "attendance": "90%"
+#   },
+#   {
+#     "id": 9,
+#     "name": "William Anderson",
+#     "department": "Finance",
+#     "designation": "Tax Consultant",
+#     "status": "Inactive",
+#     "email": "william@example.com",
+#     "attendance": "82%"
+#   },
+#   {
+#     "id": 10,
+#     "name": "Ava Thomas",
+#     "department": "Engineering",
+#     "designation": "UI/UX Designer",
+#     "status": "Active",
+#     "email": "ava@example.com",
+#     "attendance": "94%"
+#   },
+#   {
+#     "id": 11,
+#     "name": "Benjamin Harris",
+#     "department": "HR",
+#     "designation": "Payroll Specialist",
+#     "status": "Active",
+#     "email": "benjamin@example.com",
+#     "attendance": "89%"
+#   },
+#   {
+#     "id": 12,
+#     "name": "Charlotte Clark",
+#     "department": "Finance",
+#     "designation": "Auditor",
+#     "status": "Inactive",
+#     "email": "charlotte@example.com",
+#     "attendance": "85%"
+#   },
+#   {
+#     "id": 13,
+#     "name": "Henry Lewis",
+#     "department": "Engineering",
+#     "designation": "DevOps Engineer",
+#     "status": "Active",
+#     "email": "henry@example.com",
+#     "attendance": "98%"
+#   },
+#   {
+#     "id": 14,
+#     "name": "Amelia Walker",
+#     "department": "HR",
+#     "designation": "Talent Acquisition Specialist",
+#     "status": "Active",
+#     "email": "amelia@example.com",
+#     "attendance": "92%"
+#   },
+#   {
+#     "id": 15,
+#     "name": "Ethan Hall",
+#     "department": "Finance",
+#     "designation": "Investment Analyst",
+#     "status": "Active",
+#     "email": "ethan@example.com",
+#     "attendance": "90%"
+#   },
+#   {
+#     "id": 16,
+#     "name": "Mia Allen",
+#     "department": "Engineering",
+#     "designation": "Software Engineer",
+#     "status": "Inactive",
+#     "email": "mia@example.com",
+#     "attendance": "81%"
+#   },
+#   {
+#     "id": 17,
+#     "name": "Lucas Young",
+#     "department": "HR",
+#     "designation": "HR Coordinator",
+#     "status": "Active",
+#     "email": "lucas@example.com",
+#     "attendance": "93%"
+#   },
+#   {
+#     "id": 18,
+#     "name": "Harper King",
+#     "department": "Finance",
+#     "designation": "Budget Analyst",
+#     "status": "Active",
+#     "email": "harper@example.com",
+#     "attendance": "95%"
+#   },
+#   {
+#     "id": 19,
+#     "name": "Alexander Scott",
+#     "department": "Engineering",
+#     "designation": "Mobile App Developer",
+#     "status": "Active",
+#     "email": "alexander@example.com",
+#     "attendance": "97%"
+#   },
+#   {
+#     "id": 20,
+#     "name": "Ella Green",
+#     "department": "HR",
+#     "designation": "Employee Relations Manager",
+#     "status": "Inactive",
+#     "email": "ella@example.com",
+#     "attendance": "86%"
+#   }
+# ]
+
+
+from sqlalchemy import create_engine
+
+from sqlalchemy.ext.declarative import declarative_base
+
+from sqlalchemy.orm import sessionmaker
+
+DATABASE_URL = "sqlite:///./employees.db"
+
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={"check_same_thread": False}
+)
+
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
+
+Base = declarative_base()

@@ -1,0 +1,595 @@
+/* DASHBOARD */
+
+.dashboard-wrapper {
+  width: 100%;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+
+.dashboard-header p {
+  color: #64748b;
+}
+
+.date-box {
+  background: white;
+  padding: 14px 18px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+/* STATS */
+
+.stats-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.stat-card h2 {
+  margin-top: 6px;
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+.blue {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.green {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.purple {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.orange {
+  background: #ffedd5;
+  color: #ea580c;
+}
+
+/* CONTENT SECTION */
+
+.dashboard-content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.chart-section,
+.employee-section,
+.palette-card,
+.guideline-card {
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container {
+  width: 100%;
+  height: 320px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header button {
+  border: none;
+  padding: 8px 14px;
+  background: #eff6ff;
+  color: #2563eb;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.employee-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.employee-item:last-child {
+  border-bottom: none;
+}
+
+.employee-item p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* EXTRA SECTION */
+
+.extra-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.colors {
+  display: flex;
+  gap: 14px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.color {
+  width: 55px;
+  height: 55px;
+  border-radius: 12px;
+}
+
+.blue-bg {
+  background: #2563eb;
+}
+
+.dark-bg {
+  background: #0f172a;
+}
+
+.light-bg {
+  background: #f1f5f9;
+}
+
+.green-bg {
+  background: #10b981;
+}
+
+.orange-bg {
+  background: #f59e0b;
+}
+
+.red-bg {
+  background: #ef4444;
+}
+
+.guidelines {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.guidelines div {
+  background: #f8fafc;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1200px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+
+  .extra-sections {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+    height: auto;
+    padding: 20px;
+  }
+
+  .navbar-right {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .extra-sections {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .guidelines {
+    grid-template-columns: 1fr;
+  }
+
+  .page-content {
+    padding: 16px;
+  }
+
+  .login-card {
+    width: 100%;
+    padding: 30px 24px;
+  }
+}
+
+/* EMPLOYEE PAGE */
+
+.employee-page {
+  width: 100%;
+}
+
+.employee-header {
+  margin-bottom: 24px;
+}
+
+.employee-header h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.employee-header p {
+  color: #64748b;
+}
+
+/* SEARCH FILTER */
+
+.search-filter {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.search-filter input,
+.search-filter select {
+  flex: 1;
+  min-width: 220px;
+  padding: 12px 14px;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  outline: none;
+  background: white;
+}
+
+.add-btn {
+  padding: 12px 18px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* EMPLOYEE LAYOUT */
+
+.employee-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+/* TABLE */
+
+.table-wrapper {
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  overflow-x: auto;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.employee-table th {
+  text-align: left;
+  padding-bottom: 16px;
+  color: #64748b;
+}
+
+.employee-table td {
+  padding: 18px 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* STATUS */
+
+.status {
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 14px;
+}
+
+.active {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.inactive {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* PROFILE SECTION */
+
+.employee-profile-section {
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  margin-bottom: 20px;
+}
+
+.employee-cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* EMPLOYEE CARD */
+
+.employee-card {
+  background: #f8fafc;
+  padding: 18px;
+  border-radius: 16px;
+}
+
+.employee-top {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.employee-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.employee-top p {
+  color: #64748b;
+}
+
+.employee-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.employee-info span {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.active-text {
+  color: #16a34a;
+}
+
+.inactive-text {
+  color: #dc2626;
+}
+
+/* PLACEHOLDER */
+
+.placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.placeholder-card {
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.placeholder-card h3 {
+  margin-bottom: 10px;
+}
+
+/* PAGINATION */
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.pagination button {
+  padding: 8px 14px;
+  border: none;
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+
+.active-page {
+  background: #2563eb !important;
+  color: white;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .employee-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .placeholder-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .search-filter {
+    flex-direction: column;
+  }
+
+  .search-filter input,
+  .search-filter select,
+  .add-btn {
+    width: 100%;
+  }
+}
+
+
+/* PROFILE */
+
+.profile {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  width: 180px;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.profile-dropdown p {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.profile-dropdown p:hover {
+  background: #f1f5f9;
+}
+
+/* ADD EMPLOYEE */
+
+.add-employee-form {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  margin-bottom: 24px;
+}
+
+.add-employee-form input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #dbeafe;
+  outline: none;
+}
+
+.add-employee-form button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* DELETE */
+
+.delete-btn {
+  padding: 8px 14px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+  .add-employee-form {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .add-employee-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+
+

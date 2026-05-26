@@ -1,0 +1,441 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f4f7fc;
+}
+
+/* LOGIN PAGE */
+
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #4f46e5, #7c3aed);
+}
+
+.login-form {
+  width: 350px;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-form h2 {
+  text-align: center;
+  color: #333;
+}
+
+.login-form input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.login-form button {
+  padding: 12px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background: #4338ca;
+}
+
+/* DASHBOARD LAYOUT */
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 250px;
+  background: #040404;
+  color: white;
+  padding: 20px;
+}
+
+.logo {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 6px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar a:hover {
+  background: #4f46e5;
+}
+
+.sidebar .active {
+  background: #4f46e5;
+}
+
+/* MAIN SECTION */
+
+.main-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+
+.navbar {
+  height: 70px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    border-bottom: 0.1px solid grey
+}
+
+/* CONTENT */
+
+.page-content {
+  padding: 30px;
+}
+
+/* THEME BUTTON */
+
+.theme-btn {
+  padding: 10px 15px;
+  border: none;
+  background: #4f46e5;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* DARK MODE */
+
+body.dark {
+  background: #0a0a0a;
+}
+
+body.dark .stat-card, .chart-section, .employee-section, .palette-card, .guideline-card{
+color: black;
+}
+
+body.dark .navbar {
+  background: #000000;
+  color: white;
+}
+
+body.dark .page-content {
+  background: #000000;
+  color: rgb(255, 255, 255);
+}
+
+
+
+body.dark .dashboard-header h1{
+    background: #000000;
+  color: white;
+}
+
+body.dark .header{
+      background: #000000;
+  color: white;
+
+}
+
+body.dark .page-content{
+      background: #000000;
+}
+
+body.dark .date-box {
+       background: #000000;
+  color: white;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .navbar {
+    padding: 15px;
+  }
+}
+
+
+
+
+
+
+
+
+
+.logo{
+  margin-bottom:40px;
+}
+
+.menu{
+  list-style:none;
+}
+
+.menu li{
+  padding:15px;
+  margin-bottom:10px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.menu li:hover{
+  background:#1f4fff;
+}
+
+.active{
+  background:#2563eb;
+}
+
+.admin{
+  background:#11255f;
+  padding:15px;
+  border-radius:12px;
+}
+
+/* MAIN */
+
+.main{
+  flex:1;
+  padding:20px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.topbar input{
+  width:300px;
+  padding:10px;
+  border:1px solid #ddd;
+  border-radius:10px;
+}
+
+.date{
+  background:white;
+  padding:10px 20px;
+  border-radius:10px;
+}
+
+.heading{
+  margin:30px 0;
+}
+
+.heading p{
+  color:gray;
+  margin-top:5px;
+}
+
+/* CARDS */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.card p{
+  margin-top:10px;
+  color:green;
+}
+
+/* BOTTOM */
+
+.bottom{
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+}
+
+.analytics,
+.recent{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+}
+
+.section-header{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+/* GRAPH */
+
+.graph{
+  height:300px;
+  position:relative;
+  background:#f7f9fc;
+  border-radius:10px;
+}
+
+.line{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:
+  linear-gradient(
+    135deg,
+    transparent 20%,
+    #60a5fa 20%,
+    #60a5fa 40%,
+    transparent 40%,
+    transparent 60%,
+    #60a5fa 60%,
+    #60a5fa 80%,
+    transparent 80%
+  );
+}
+
+/* EMPLOYEES */
+
+.employee{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 0;
+  border-bottom:1px solid #eee;
+}
+
+.employee p{
+  color:gray;
+  font-size:14px;
+}
+
+
+
+/* HEADER */
+.header {
+  height: 70px;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left:30px;
+  /*border-bottom: 1px solid #eef1f6;*/
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+/* SEARCH BOX */
+.header input {
+  width: 320px;
+  padding: 12px 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  outline: none;
+  background: #f8fafc;
+  font-size: 14px;
+  transition: 0.3s;
+  margin-right: 10px;
+}
+
+.header input:focus {
+  border-color: #2563eb;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* RIGHT SECTION */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* NOTIFICATION ICON */
+.notification {
+  position: relative;
+  font-size: 22px;
+  cursor: pointer;
+  color: #1e293b;
+  transition: 0.3s;
+}
+
+.notification:hover {
+  color: #2563eb;
+}
+
+
+
+
+
+/* PROFILE */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  padding: 8px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+  color: #1e293b;
+  margin-right: 14px;
+}
+
+.profile:hover {
+  background: #eef2ff;
+}
+
+/* PROFILE IMAGE */
+.profile::before {
+  content: "👤";
+  font-size: 20px;
+}
+
+
+.btn{
+    width: 57px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+}

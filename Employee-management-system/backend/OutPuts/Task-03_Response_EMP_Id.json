@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "data": {
+    "id": 15,
+    "name": "Ethan Hall",
+    "department": "Finance",
+    "designation": "Investment Analyst",
+    "status": "Active",
+    "email": "ethan@example.com",
+    "attendance": "90%"
+  }
+}
