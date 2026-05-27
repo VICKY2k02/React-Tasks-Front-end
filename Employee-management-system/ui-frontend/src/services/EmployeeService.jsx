@@ -70,3 +70,19 @@ export const updateEmployeeStatus = async (
   return response.data;
 };
 
+
+// UPDATE EMPLOYEE
+
+export const updateEmployee = async (
+  id,
+  employeeData
+) => {
+
+  const response = await axios.put(
+    `http://127.0.0.1:8000/employees/${id}`,
+    employeeData
+  );
+
+  return response.data;
+};
+

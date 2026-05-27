@@ -69,6 +69,8 @@ body {
 .employee-table tr:hover {
   background: #f1f1f1;
   cursor: pointer;
+  transform: scale(1.01);
+
 }
 
 /* .profile-preview {
@@ -169,7 +171,14 @@ body.dark .dashboard-container {
   padding: 6px 12px;
   border-radius: 6px;
  cursor: pointer;
+  transform: scale(1.05);
 }
+
+ .delete-btn:hover{
+  background-color: rgb(251, 82, 5);
+  transform: scale(1.10);
+}
+  
 
 
 .active-btn {
@@ -182,10 +191,31 @@ body.dark .dashboard-container {
 }
 
 .inactive-btn {
-  background: red;
+  background: rgb(252, 22, 22);
   color: white;
   border: none;
   padding: 6px 14px;
   border-radius: 20px;
   cursor: pointer;
+
 }
+
+
+/* Edit Button Styling */
+.edit-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Hover Effect */
+.edit-btn:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+
+

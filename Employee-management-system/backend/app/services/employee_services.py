@@ -31,7 +31,6 @@ def create_employee(db: Session, employee):
         status=employee.status
 
 
-
     )
 
     db.add(new_employee)
@@ -39,6 +38,13 @@ def create_employee(db: Session, employee):
     db.commit()
 
     db.refresh(new_employee)
+
+    return {
+        "success": True,
+        "message": "Employee added successfully",
+        "data": new_employee
+    }
+
 
 
 
@@ -84,3 +90,35 @@ def update_employee_status(
 
     return employee
 
+# UPDATE EMPLOYEE
+
+def update_employee(
+    db: Session,
+    employee_id: int,
+    employee_data
+):
+
+    employee = db.query(Employee).filter(
+        Employee.id == employee_id
+    ).first()
+
+    if not employee:
+        return None
+
+    employee.name = employee_data.name
+
+    employee.email = employee_data.email
+
+    employee.department = employee_data.department
+
+    employee.designation = employee_data.designation
+
+    employee.attendance = employee_data.attendance
+
+    employee.status = employee_data.status
+
+    db.commit()
+
+    db.refresh(employee)
+
+    return employee

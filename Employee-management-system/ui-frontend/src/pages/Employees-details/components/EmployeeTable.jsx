@@ -1,6 +1,6 @@
 import React from "react";
 
-const EmployeeTable = ({ employees, setSelectedEmployee, handleDeleteEmployee, handleStatusToggle }) => {
+const EmployeeTable = ({ employees, setSelectedEmployee, handleDeleteEmployee, handleStatusToggle, handleEdit }) => {
 
   return (
     <table className="employee-table">
@@ -13,6 +13,7 @@ const EmployeeTable = ({ employees, setSelectedEmployee, handleDeleteEmployee, h
           <th>Attendance</th>
           <th>Status</th>
           <th>Actions</th>
+          <th>Edit</th>
         </tr>
       </thead>
 
@@ -56,6 +57,16 @@ const EmployeeTable = ({ employees, setSelectedEmployee, handleDeleteEmployee, h
                 onClick={() => handleDeleteEmployee(employee.id)}
               >
                 Delete
+              </button>
+            </td>
+
+
+            <td>
+              <button
+                className="edit-btn"
+                onClick={() => handleEdit(employee)}
+              >
+                Edit
               </button>
             </td>
 

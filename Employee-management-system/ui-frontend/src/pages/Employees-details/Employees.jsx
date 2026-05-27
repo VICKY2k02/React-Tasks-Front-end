@@ -101,7 +101,8 @@ import {
   getEmployees,
   addEmployee,
   deleteEmployee,
-  updateEmployeeStatus
+  updateEmployeeStatus,
+  updateEmployee
 } from "../../services/EmployeeService";
 
 import EmployeeTable from "../Employees-details/components/EmployeeTable";
@@ -124,6 +125,7 @@ const EmployeeDashboard = () => {
   // const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingEmployee, setEditingEmployee] = useState(null);
 
   const employeesPerPage = 5;
 
@@ -187,6 +189,9 @@ const handleAddEmployee = async (employeeData) => {
 
     const response = await addEmployee(employeeData);
 
+    alert("Employee added successfully");
+
+
     console.log("ADD RESPONSE:", response);
 
     // RELOAD EMPLOYEES
@@ -208,6 +213,9 @@ const handleAddEmployee = async (employeeData) => {
 
 const handleDeleteEmployee = async (id) => {
 
+  const confirmDelete = window.confirm(
+      "Are you sure?");
+
   try {
 
     await deleteEmployee(id);
@@ -220,7 +228,25 @@ const handleDeleteEmployee = async (id) => {
 
   }
 
+
+  if (!confirmDelete) return;
+
+    try {
+
+      await deleteEmployee(id);
+
+      alert("Employee deleted");
+
+      fetchEmployees();
+
+    } catch (error) {
+
+      alert("Delete failed");
+    }
+
 };
+
+
 
 
 
@@ -251,6 +277,44 @@ const handleStatusToggle = async (
 
 };
 
+// HANDLE EDIT
+
+const handleEdit = (employee) => {
+
+  setEditingEmployee(employee);
+
+  setIsModalOpen(true);
+
+};
+
+// HANDLE UPDATE EMPLOYEE
+
+const handleUpdateEmployee = async (
+  employeeData
+) => {
+
+  try {
+
+    await updateEmployee(
+      editingEmployee.id,
+      employeeData
+    );
+
+    alert("Employee updated successfully");
+
+    fetchEmployees();
+
+    setIsModalOpen(false);
+
+    setEditingEmployee(null);
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert("Update failed");
+  }
+};
 
 const filteredEmployees = Array.isArray(employees)
   ? employees.filter((employee) => {
@@ -336,6 +400,7 @@ const filteredEmployees = Array.isArray(employees)
         setSelectedEmployee={setSelectedEmployee}
         handleDeleteEmployee={handleDeleteEmployee}
         handleStatusToggle={handleStatusToggle}
+        handleEdit={handleEdit}
       />
 
       <EmployeeProfilePreview employee={selectedEmployee} />
@@ -348,15 +413,25 @@ const filteredEmployees = Array.isArray(employees)
       setCurrentPage={setCurrentPage}
     />
 
-    {/* <AddEmployeeModal
-      isOpen={isshowModal}
-      onClose={() => setShowModal(false)}
+{/*     
+    <AddEmployeeModal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
       onAddEmployee={handleAddEmployee}
     /> */}
-<AddEmployeeModal
+
+    <AddEmployeeModal
   isOpen={isModalOpen}
-  onClose={() => setIsModalOpen(false)}
-  onAddEmployee={handleAddEmployee}
+  onClose={() => {
+    setIsModalOpen(false);
+    setEditingEmployee(null);
+  }}
+  onAddEmployee={
+    editingEmployee
+      ? handleUpdateEmployee
+      : handleAddEmployee
+  }
+  editingEmployee={editingEmployee}
 />
   </div>
 );

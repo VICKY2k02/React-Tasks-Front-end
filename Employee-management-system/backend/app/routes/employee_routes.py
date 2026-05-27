@@ -13,7 +13,8 @@ from app.services.employee_services import (
     get_all_employees,
     create_employee,
     delete_employee,
-    update_employee_status
+    update_employee_status,
+    update_employee
 )
 
 router = APIRouter()
@@ -77,6 +78,35 @@ def remove_employee(
     }
 
 
+# UPDATE EMPLOYEE
+
+@router.put("/employees/{employee_id}")
+
+def edit_employee(
+    employee_id: int,
+    employee: EmployeeCreate,
+    db: Session = Depends(get_db)
+):
+
+    updated_employee = update_employee(
+        db,
+        employee_id,
+        employee
+    )
+
+    if not updated_employee:
+
+        return {
+            "success": False,
+            "message": "Employee not found"
+        }
+
+    return {
+        "success": True,
+        "message": "Employee updated successfully",
+        "data": updated_employee
+    }
+
 # UPDATE STATUS
 
 @router.put("/employees/{employee_id}/status")
@@ -101,3 +131,6 @@ def update_status(
         }
 
     return employee
+
+
+
