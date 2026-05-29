@@ -1,4 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import { useContext } from "react";
+
+import { AuthContext } from "../context/AuthContext";
 
 import {
   FaHome,
@@ -6,35 +10,75 @@ import {
   FaBuilding,
   FaClipboardCheck,
   FaCog,
+  FaSignOutAlt
 } from "react-icons/fa";
 
 const Sidebar = () => {
+
+  const navigate = useNavigate();
+
+  const { user, logout } =
+    useContext(AuthContext);
+
+  const handleLogout = () => {
+
+    logout();
+
+    navigate("/");
+  };
+
   return (
+
     <div className="sidebar">
-      <h2 className="logo">EMS</h2>
+
+      <h2 className="logo">
+        EMS
+      </h2>
 
       <nav>
+
         <NavLink to="/dashboard">
-          <FaHome /> Dashboard
+          <FaHome />
+          Dashboard
         </NavLink>
 
-        <NavLink to="/employees">
-          <FaUsers /> Employees
-        </NavLink>
+        {
+          user?.role === "admin" && (
+            <>
+              <NavLink to="/employees">
+                <FaUsers />
+                Employees
+              </NavLink>
 
-        <NavLink to="/departments">
-          <FaBuilding /> Departments
-        </NavLink>
+              <NavLink to="/departments">
+                <FaBuilding />
+                Departments
+              </NavLink>
 
-        <NavLink to="/attendance">
-          <FaClipboardCheck /> Attendance
-        </NavLink>
+              <NavLink to="/attendance">
+                <FaClipboardCheck />
+                Attendance
+              </NavLink>
+            </>
+          )
+        }
 
         <NavLink to="/settings">
-          <FaCog /> Settings
+          <FaCog />
+          Settings
         </NavLink>
 
       </nav>
+
+      <button
+        className="logout-btn"
+        onClick={handleLogout}
+      >
+
+        <FaSignOutAlt />
+        Logout
+
+      </button>
 
     </div>
   );

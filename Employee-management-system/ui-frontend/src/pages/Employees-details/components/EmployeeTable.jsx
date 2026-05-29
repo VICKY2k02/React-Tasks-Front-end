@@ -1,5 +1,7 @@
 import React from "react";
 
+import {FaEdit, FaTrash} from "react-icons/fa";
+
 const EmployeeTable = ({ employees, setSelectedEmployee, handleDeleteEmployee, handleStatusToggle, handleEdit }) => {
 
   return (
@@ -51,24 +53,28 @@ const EmployeeTable = ({ employees, setSelectedEmployee, handleDeleteEmployee, h
                 </button>
           </td>
 
-            <td>
-              <button
-                className="delete-btn"
-                onClick={() => handleDeleteEmployee(employee.id)}
-              >
-                Delete
-              </button>
-            </td>
 
+          <td>
+                <button
+                    className="delete-btn"
+                    onClick={() =>
+                      handleDeleteEmployee(employee.id)
+                    }
+                  >
+                    <FaTrash />
+                </button>
+          </td>
 
-            <td>
-              <button
-                className="edit-btn"
-                onClick={() => handleEdit(employee)}
-              >
-                Edit
-              </button>
-            </td>
+          <td>
+                <button
+                    className="edit-btn"
+                    onClick={() =>
+                      handleEdit(employee)
+                    }
+                  >
+                    <FaEdit />
+                </button>
+          </td>
 
           </tr>
 

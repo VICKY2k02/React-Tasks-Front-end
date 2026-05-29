@@ -73,12 +73,6 @@ body {
 
 }
 
-/* .profile-preview {
-  width: 30%;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-} */
 
 
 .profile-preview{
@@ -164,22 +158,27 @@ body.dark .dashboard-container {
 }
 
 
-.delete-btn {
-  background: rgb(255, 103, 32);
-  color: white;
+
+.delete-btn,
+.edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
   border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
- cursor: pointer;
-  transform: scale(1.05);
+  cursor: pointer;
+  border-radius: 5px;
 }
 
- .delete-btn:hover{
-  background-color: rgb(251, 82, 5);
-  transform: scale(1.10);
+.delete-btn {
+  background: #ffffff;
+  color: rgb(0, 0, 0);
 }
-  
 
+.edit-btn {
+  background: #ffffff;
+  color: rgb(0, 0, 0);
+}
 
 .active-btn {
   background: green;
@@ -201,21 +200,6 @@ body.dark .dashboard-container {
 }
 
 
-/* Edit Button Styling */
-.edit-btn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* Hover Effect */
-.edit-btn:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
-}
 
 
 
