@@ -1,101 +1,3 @@
-// import React, { useState } from "react";
-// import employeesData from "../Employees-details/data/employees.json"
-// import EmployeeTable from "../Employees-details/components/EmployeeTable"
-// import EmployeeProfilePreview from "../Employees-details/components/EmployeeProfilePreview"
-// import SearchFilter from "./components/SearchFilter";
-// import DashboardStats from "./components/DashBoardStata";
-// import Pagination from "../Employees-details/components/Pagination"
-// import "../Employees-details/Styles.css"
-
-// const EmployeeDashboard = () => {
-//   const [employees] = useState(employeesData);
-//   const [search, setSearch] = useState("");
-//   const [department, setDepartment] = useState("");
-//   const [selectedEmployee, setSelectedEmployee] = useState(null);
-//   const [currentPage, setCurrentPage] = useState(1);
-
-//   const employeesPerPage = 5;
-
-//   const filteredEmployees = employees.filter((employee) => {
-//     return (
-//       employee.name.toLowerCase().includes(search.toLowerCase()) &&
-//       (department === "" || employee.department === department)
-//     );
-//   });
-
-//   const indexOfLastEmployee = currentPage * employeesPerPage;
-//   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-
-//   const currentEmployees = filteredEmployees.slice(
-//     indexOfFirstEmployee,
-//     indexOfLastEmployee
-//   );
-
-//   return (
-//     <div className="dashboard-container">
-
-//       <div className="dashboard-header">
-//         <h1>Employee Dashboard</h1>
-
-//         <button className="add-btn">
-//           + Add Employee
-//         </button>
-//       </div>
-
-//       <DashboardStats employees={employees} />
-
-//       <SearchFilter
-//         search={search}
-//         setSearch={setSearch}
-//         department={department}
-//         setDepartment={setDepartment}
-//       />
-
-//       <div className="dashboard-contents">
-
-//         <EmployeeTable
-//           employees={currentEmployees}
-//           setSelectedEmployee={setSelectedEmployee}
-//         />
-
-//         <EmployeeProfilePreview employee={selectedEmployee} />
-
-//       </div>
-
-//       <Pagination
-//         totalEmployees={filteredEmployees.length}
-//         employeesPerPage={employeesPerPage}
-//         currentPage={currentPage}
-//         setCurrentPage={setCurrentPage}
-//       />
-
-//       <div className="placeholder-sections">
-
-//         <div className="placeholder-card">
-//           <h3>Employee Details</h3>
-//           <p>Employee information section placeholder.</p>
-//         </div>
-
-//         <div className="placeholder-card">
-//           <h3>Department Section</h3>
-//           <p>Department management placeholder.</p>
-//         </div>
-
-//         <div className="placeholder-card">
-//           <h3>Attendance Section</h3>
-//           <p>Attendance tracking placeholder.</p>
-//         </div>
-
-//       </div>
-
-//     </div>
-//   );
-// };
-
-// export default EmployeeDashboard;
-
-// i'm writing new code beacause im getting errors to import data from back-end thats why im writing new code in the same file.
-
 import React, { useEffect, useState } from "react";
 import {
   getEmployees,
@@ -248,34 +150,39 @@ const handleDeleteEmployee = async (id) => {
 
 
 
+ // ADD STATUS HANDLER
 
-
-// ADD STATUS HANDLER
-const handleStatusToggle = async (
-  employee
+const handleStatusChange = async (
+  employeeId,
+  status
 ) => {
 
   try {
 
-    const newStatus =
-      employee.status === "Active"
-        ? "Inactive"
-        : "Active";
-
     await updateEmployeeStatus(
-      employee.id,
-      newStatus
+      employeeId,
+      status
     );
 
-    fetchEmployees();
+    setEmployees((prev) =>
+      prev.map((emp) =>
+        emp.id === employeeId
+          ? {
+              ...emp,
+              status
+            }
+          : emp
+      )
+    );
 
   } catch (error) {
 
     console.log(error);
 
   }
-
 };
+
+
 
 // HANDLE EDIT
 
@@ -395,12 +302,13 @@ const filteredEmployees = Array.isArray(employees)
     />
 
     <div className="dashboard-contents">
+
       <EmployeeTable
         employees={currentEmployees}
         setSelectedEmployee={setSelectedEmployee}
         handleDeleteEmployee={handleDeleteEmployee}
-        handleStatusToggle={handleStatusToggle}
         handleEdit={handleEdit}
+        handleStatusChange={handleStatusChange}
       />
 
       <EmployeeProfilePreview employee={selectedEmployee} />
@@ -413,26 +321,20 @@ const filteredEmployees = Array.isArray(employees)
       setCurrentPage={setCurrentPage}
     />
 
-{/*     
-    <AddEmployeeModal
-      isOpen={isModalOpen}
-      onClose={() => setIsModalOpen(false)}
-      onAddEmployee={handleAddEmployee}
-    /> */}
 
     <AddEmployeeModal
-  isOpen={isModalOpen}
-  onClose={() => {
-    setIsModalOpen(false);
-    setEditingEmployee(null);
-  }}
-  onAddEmployee={
-    editingEmployee
+      isOpen={isModalOpen}
+      onClose={() => {
+      setIsModalOpen(false);
+      setEditingEmployee(null);
+    }}
+      onAddEmployee={
+      editingEmployee
       ? handleUpdateEmployee
       : handleAddEmployee
-  }
-  editingEmployee={editingEmployee}
-/>
+    }
+      editingEmployee={editingEmployee}
+    />
   </div>
 );
 };

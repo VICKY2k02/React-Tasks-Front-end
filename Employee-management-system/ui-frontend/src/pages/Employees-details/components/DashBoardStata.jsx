@@ -12,6 +12,10 @@ const DashboardStats = ({ employees }) => {
     const inactiveEmployees = employeeList.filter(
     (emp) => emp.status === "Inactive"
   ).length;
+     
+   const onLeaveEmployees = employeeList.filter(
+    (emp) => emp.status === "On Leave"
+  ).length;
 
   const departments = [
     ...new Set(employeeList.map(emp => emp.department))
@@ -30,9 +34,14 @@ const DashboardStats = ({ employees }) => {
         <p>{activeEmployees}</p>
       </div>
 
-        <div className="stats-card">
+      <div className="stats-card">
         <h3>In Active Employees</h3>
         <p>{inactiveEmployees}</p>
+      </div>
+
+      <div className="stats-card">
+        <h3>On Leave</h3>
+        <p>{onLeaveEmployees}</p>
       </div>
 
       <div className="stats-card">

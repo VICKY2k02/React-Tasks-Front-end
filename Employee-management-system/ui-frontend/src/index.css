@@ -62,11 +62,19 @@ body {
 
 /* SIDEBAR */
 
-.sidebar {
+/* .sidebar {
   width: 250px;
   background: #040404;
   color: white;
   padding: 20px;
+} */
+ .sidebar{
+  width:250px;
+  background:#020617;
+  color:white;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
 }
 
 .logo {
@@ -127,7 +135,81 @@ body {
 
 /* THEME BUTTON */
 
-.theme-btn {
+body.dark {
+  background: #0f172a;
+  color: white;
+}
+
+body.dark .sidebar {
+  background: #020617;
+}
+
+body.dark .navbar,
+body.dark .header,
+body.dark .date-box,
+body.dark .stat-card,
+body.dark .employee-profile-section
+body.dark .stat-card,
+body.dark .chart-section,
+body.dark .employee-section,
+body.dark .palette-card,
+body.dark .guideline-card,
+body.dark .table-wrapper,
+body.dark .employee-profile-section 
+{
+  background: #1e293b;
+  color: white;
+}
+
+
+body.dark .employee-table{
+  background:#1e293b;
+}
+
+body.dark .employee-table th{
+  color:#cbd5e1;
+}
+
+body.dark .employee-table td{
+  color:white;
+}
+
+body.dark .search-filter input,
+body.dark .search-filter select{
+  background:#334155;
+  color:white;
+  border:1px solid #475569;
+}
+
+body.dark .employee-card{
+  background:#334155;
+}
+
+body.dark .profile-preview{
+  background:#1e293b;
+  color:white;
+}
+
+body.dark input,
+body.dark select {
+  background: #334155;
+  color: rgb(0, 0, 0);
+  border: 1px solid #475569;
+}
+
+body.dark .employee-table th,
+body.dark .employee-table td {
+  color: white;
+}
+body.dark .dashboard-header h1{
+    /* background: #000000; */
+  color: white;
+}
+
+
+
+
+/* .theme-btn {
   padding: 10px 15px;
   border: none;
   background: #4f46e5;
@@ -137,7 +219,7 @@ body {
 }
 
 /* DARK MODE */
-
+/* 
 body.dark {
   background: #0a0a0a;
 }
@@ -158,10 +240,7 @@ body.dark .page-content {
 
 
 
-body.dark .dashboard-header h1{
-    background: #000000;
-  color: white;
-}
+
 
 body.dark .header{
       background: #000000;
@@ -176,7 +255,7 @@ body.dark .page-content{
 body.dark .date-box {
        background: #000000;
   color: white;
-}
+} */ 
 
 /* RESPONSIVE */
 
@@ -193,13 +272,6 @@ body.dark .date-box {
     padding: 15px;
   }
 }
-
-
-
-
-
-
-
 
 
 .logo{
@@ -439,3 +511,6 @@ body.dark .date-box {
     border-radius: 10px;
     border: none;
 }
+
+
+

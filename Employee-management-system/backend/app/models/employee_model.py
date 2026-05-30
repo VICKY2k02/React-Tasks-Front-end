@@ -14,7 +14,8 @@ class Employee(Base):
 
     designation = Column(String, nullable=True)
 
+    attendance = Column(String, nullable=False)
+    
     status = Column(String, nullable=False)
 
 
-    attendance = Column(String, nullable=False)

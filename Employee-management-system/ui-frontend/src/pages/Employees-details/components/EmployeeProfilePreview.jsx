@@ -1,40 +1,67 @@
 import React from "react";
 
 const EmployeeProfilePreview = ({ employee }) => {
+
   if (!employee) {
+
     return (
-      <div className="profile-preview">
+      <div className="profile-card">
         <h3>Select Employee</h3>
+        <p>
+          Click employee row to view details.
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="profile-preview">
 
-      <h2>{employee.name}</h2>
+    <div className="profile-card">
 
-      <p>
-        <strong>Email:</strong> {employee.email}
-      </p>
+      <div className="profile-top">
 
-      <p>
-        <strong>Department:</strong> {employee.department}
-      </p>
+        <div className="profile-avatar">
+          {employee.name.charAt(0)}
+        </div>
 
-      <p>
-        <strong>Designation:</strong> {employee.designation}
-      </p>
+        <div className="emp">
 
-      <p>
-        <strong>Attendance:</strong> {employee.attendance}
-      </p>
+          <h2>{employee.name}</h2>
 
-      <p>
-        <strong>Status:</strong> {employee.status}
-      </p>
+          <span>
+            {employee.designation}
+          </span>
+
+        </div>
+
+      </div>
+
+      <div className="profile-details">
+
+        <div>
+          <strong>Email</strong>
+          <p>{employee.email}</p>
+        </div>
+
+        <div>
+          <strong>Department</strong>
+          <p>{employee.department}</p>
+        </div>
+
+        <div>
+          <strong>Attendance</strong>
+          <p>{employee.attendance}</p>
+        </div>
+
+        <div>
+          <strong>Status</strong>
+          <p>{employee.status}</p>
+        </div>
+
+      </div>
 
     </div>
+
   );
 };
 

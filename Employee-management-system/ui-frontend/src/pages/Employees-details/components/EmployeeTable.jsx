@@ -2,7 +2,12 @@ import React from "react";
 
 import {FaEdit, FaTrash} from "react-icons/fa";
 
-const EmployeeTable = ({ employees, setSelectedEmployee, handleDeleteEmployee, handleStatusToggle, handleEdit }) => {
+const EmployeeTable = ({ employees, 
+                          setSelectedEmployee, 
+                          handleDeleteEmployee, 
+                          // handleStatusToggle,
+                          handleStatusChange,
+                          handleEdit }) => {
 
   return (
     <table className="employee-table">
@@ -38,19 +43,39 @@ const EmployeeTable = ({ employees, setSelectedEmployee, handleDeleteEmployee, h
 
  
 
-            <td>
-                <button
-                  className={
-                    employee.status === "Active"
-                      ? "active-btn"
-                      : "inactive-btn"
-                  }
-                  onClick={() =>
-                    handleStatusToggle(employee)
-                  }
-                >
-                  {employee.status}
-                </button>
+          <td>
+
+              <select
+                className={`status-select ${
+                  employee.status === "Active"
+                    ? "status-active"
+                    : employee.status === "Inactive"
+                    ? "status-inactive"
+                    : "status-leave"
+                }`}
+                value={employee.status}
+                onChange={(e) =>
+                  handleStatusChange(
+                    employee.id,
+                    e.target.value
+                  )
+                }
+              >
+
+              <option value="Active">
+                Active
+              </option>
+
+              <option value="Inactive">
+                Inactive
+              </option>
+
+              <option value="On Leave">
+                On Leave
+              </option>
+
+              </select>
+
           </td>
 
 

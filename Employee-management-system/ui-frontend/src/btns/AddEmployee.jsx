@@ -154,6 +154,10 @@ useEffect(() => {
               Inactive
             </option>
 
+            <option value="On Leave">
+               On Leave
+            </option>
+
           </select>
 
           <button

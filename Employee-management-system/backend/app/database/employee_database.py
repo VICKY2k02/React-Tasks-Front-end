@@ -25,6 +25,7 @@ def create_employee(
         email=employee_data.email,
         department=employee_data.department,
         designation=employee_data.designation,
+         attendance=employee_data.attendance,
         status=employee_data.status
     )
 
