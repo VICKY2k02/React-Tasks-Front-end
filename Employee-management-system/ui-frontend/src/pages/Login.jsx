@@ -13,14 +13,11 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const { login } =
-    useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
-  const [showPassword,
-    setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const [formData,
-    setFormData] = useState({
+  const [formData, setFormData] = useState({
       email: "",
       password: ""
     });
@@ -42,30 +39,37 @@ const Login = () => {
 
   const handleLogin = async (e) => {
 
-    e.preventDefault();
+  e.preventDefault();
 
-    setLoading(true);
+  setLoading(true);
+  setError("");
 
-    try {
+  try {
 
-      const response =
-        await loginUser(formData);
+    const response = await loginUser(formData);
 
-      login(response);
+login(response);
 
-      navigate("/dashboard");
+setFormData({
+  email: "",
+  password: ""
+});
 
-    } catch (err) {
+navigate("/dashboard");
 
-      setError(
-        "Invalid Email or Password"
-      );
+  } catch (err) {
 
-    } finally {
+    setError(
+      err.response?.data?.detail ||
+      "Invalid Email or Password"
+    );
 
-      setLoading(false);
-    }
-  };
+  } finally {
+
+    setLoading(false);
+  }
+
+};
 
   return (
 
@@ -142,6 +146,15 @@ const Login = () => {
 
           </div>
 
+                  <p
+          className="forgot-link"
+          onClick={() =>
+            navigate("/forgot-password")
+          }
+        >
+          Forgot Password?
+        </p>
+
         <button
           type="submit"
         >
@@ -153,6 +166,18 @@ const Login = () => {
           }
 
         </button>
+
+
+          <p
+            className="forgot-link"
+            onClick={() =>
+            navigate("/signup")
+            }
+          >
+            Sign-Up
+          </p>
+
+
 
       </form>
 

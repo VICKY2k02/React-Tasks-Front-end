@@ -2,8 +2,8 @@ import { useContext } from "react";
 
 import ThemeToggle from "./ThemeToggle";
 
-import { AuthContext } from "../context/AuthContext";
-
+import {AuthContext}  from "../context/AuthContext";
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 function Header() {
 
@@ -14,16 +14,11 @@ function Header() {
 
     <div className="header">
 
-      <input
-        type="text"
-        placeholder="Search here..."
-      />
-
       <div className="header-right">
 
-        <span className="notification">
-          🔔
-        </span>
+          <div className="nav-right">
+            <IoMdNotificationsOutline className="bell-icon" />
+          </div>
 
         <div className="profile">
 

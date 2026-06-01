@@ -237,3 +237,20 @@ body.dark .stats-card {
 
 
 
+/* bell-icon */
+
+.bell-icon {
+  font-size: 25px;
+  cursor: pointer;
+  color: #000000;
+  transition: 0.2s;
+}
+
+.bell-icon:hover {
+  color: #2563eb;
+  transform: scale(1.1);
+}
+
+body.dark .bell-icon{
+  color:rgb(255, 255, 255) ;
+}

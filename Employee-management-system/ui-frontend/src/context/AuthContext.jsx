@@ -2,44 +2,48 @@ import { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+
+    const savedUser =
+      localStorage.getItem("user");
+
+    return savedUser
+      ? JSON.parse(savedUser)
+      : null;
+  });
 
   useEffect(() => {
 
-    const storedUser = localStorage.getItem("user");
+    const savedUser =
+      localStorage.getItem("user");
 
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
     }
 
   }, []);
 
   const login = (userData) => {
 
+    setUser(userData);
+
     localStorage.setItem(
       "user",
       JSON.stringify(userData)
     );
-
-    localStorage.setItem(
-      "token",
-      userData.token
-    );
-
-    setUser(userData);
   };
 
   const logout = () => {
 
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-
     setUser(null);
+
+    localStorage.removeItem("user");
   };
 
   return (
+
     <AuthContext.Provider
       value={{
         user,
@@ -47,9 +51,10 @@ const AuthProvider = ({ children }) => {
         logout
       }}
     >
+
       {children}
+
     </AuthContext.Provider>
+
   );
 };
-
-export default AuthProvider;

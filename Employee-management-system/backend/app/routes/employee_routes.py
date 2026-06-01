@@ -4,6 +4,8 @@ from sqlalchemy.orm import Session
 
 from app.database.connection import SessionLocal
 
+from app.models.employee_model import Employee
+
 from app.schemas.employee_schema import (
     EmployeeCreate,
     EmployeeResponse
@@ -45,14 +47,26 @@ def fetch_employees(db: Session = Depends(get_db)):
 # ADD EMPLOYEE
 
 @router.post("/employees")
+def create_employee(employee: EmployeeCreate, db: Session = Depends(get_db)):
 
-def add_employee(
-    employee: EmployeeCreate,
-    db: Session = Depends(get_db)
-):
+    new_employee = Employee(
+        name=employee.name,
+        email=employee.email,
+        department=employee.department,
+        designation=employee.designation,
+        attendance=employee.attendance,
+        status=employee.status
+    )
 
-    return create_employee(db, employee)
+    db.add(new_employee)
+    db.commit()
+    db.refresh(new_employee)
 
+    return {
+        "success": True,
+        "message": "Employee created successfully",
+        "data": new_employee
+    }
 
 # DELETE EMPLOYEE
 
@@ -79,6 +93,7 @@ def remove_employee(
 
 
 # UPDATE EMPLOYEE
+
 
 @router.put("/employees/{employee_id}")
 

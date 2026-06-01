@@ -7,6 +7,7 @@ import {
   ResponsiveContainer
 } from "recharts";
 
+
 const AttendanceChart = ({ employees }) => {
     
     const data = employees.map(emp => ({
@@ -29,12 +30,12 @@ const AttendanceChart = ({ employees }) => {
 
         <BarChart data={data}>
 
-          <XAxis dataKey="name"
-                 tick={{ fill: "#ffffff" }}
+          <XAxis dataKey="name"  className="xaxis"
+                 tick={{ fill: "#555353" }}
           />
 
-          <YAxis
-             tick={{ fill: "#ffffff" }}
+          <YAxis className="yaxis"
+             tick={{ fill: "#555353" }}
           />
 
           <Tooltip

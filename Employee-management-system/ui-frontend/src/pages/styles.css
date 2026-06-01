@@ -522,7 +522,7 @@ body.dark .status-leave {
 
 /* RESPONSIVE */
 
-@media (max-width: 992px) {
+/* @media (max-width: 992px) {
   .employee-layout {
     grid-template-columns: 1fr;
   }
@@ -530,7 +530,7 @@ body.dark .status-leave {
   .placeholder-grid {
     grid-template-columns: 1fr;
   }
-}
+} */
 
 @media (max-width: 600px) {
   .search-filter {
@@ -906,4 +906,68 @@ body.dark   .profile-details{
 
 body.dark .emp {
   color: black;
+}
+
+
+/* attendance */
+
+.download-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.download-btn:hover {
+  background: #1d4ed8;
+}
+
+
+
+/* attendance */
+.attendance-page {
+  padding: 20px;
+}
+
+.download-btn {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.download-btn:hover {
+  opacity: 0.9;
+}
+
+.access-msg {
+  margin-top: 15px;
+  color: #ef4444;
+}
+
+body.dark .download-btn {
+  background: #3b82f6;
+}
+
+
+body.dark .profile{
+  background-color: #0f172a;
+  color: white;
+}
+
+body.dark .btn {
+  background-color: #0f172a;
+  color: white;
+}
+
+
+.xaxis,.yaxis{
+  color: rgb(0, 0, 0);
 }

@@ -1,7 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-
 import { useContext } from "react";
-
 import { AuthContext } from "../context/AuthContext";
 
 import {
@@ -37,36 +35,36 @@ const Sidebar = () => {
 
       <nav>
 
+        {/* Available for Admin & User */}
         <NavLink to="/dashboard">
           <FaHome />
           Dashboard
         </NavLink>
 
-        {
-          user?.role === "admin" && (
-            <>
-              <NavLink to="/employees">
-                <FaUsers />
-                Employees
-              </NavLink>
-
-              <NavLink to="/departments">
-                <FaBuilding />
-                Departments
-              </NavLink>
-
-              <NavLink to="/attendance">
-                <FaClipboardCheck />
-                Attendance
-              </NavLink>
-            </>
-          )
-        }
-
-        <NavLink to="/settings">
-          <FaCog />
-          Settings
+        <NavLink to="/employees">
+          <FaUsers />
+          Employees
         </NavLink>
+
+        {/* Admin Only */}
+        {user?.role === "admin" && (
+          <>
+            <NavLink to="/departments">
+              <FaBuilding />
+              Departments
+            </NavLink>
+
+            <NavLink to="/attendance">
+              <FaClipboardCheck />
+              Attendance
+            </NavLink>
+
+            <NavLink to="/settings">
+              <FaCog />
+              Settings
+            </NavLink>
+          </>
+        )}
 
       </nav>
 
@@ -74,10 +72,8 @@ const Sidebar = () => {
         className="logout-btn"
         onClick={handleLogout}
       >
-
         <FaSignOutAlt />
         Logout
-
       </button>
 
     </div>

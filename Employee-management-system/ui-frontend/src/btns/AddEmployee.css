@@ -97,3 +97,16 @@ body.dark .modal-container {
    background: #1e293b;
   color: white;
 }
+
+
+.error-text {
+color: #dc2626;
+font-size: 12px;
+margin-top: 4px;
+margin-bottom: 10px;
+}
+
+.submit-btn:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+}
