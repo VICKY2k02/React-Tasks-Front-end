@@ -37,7 +37,7 @@ const Login = () => {
     });
   };
 
-  const handleLogin = async (e) => {
+const handleLogin = async (e) => {
 
   e.preventDefault();
 
@@ -48,14 +48,26 @@ const Login = () => {
 
     const response = await loginUser(formData);
 
-login(response);
+    console.log("LOGIN RESPONSE:", response);
 
-setFormData({
-  email: "",
-  password: ""
-});
+    localStorage.setItem(
+      "email",
+      response.email
+    );
 
-navigate("/dashboard");
+    localStorage.setItem(
+      "token",
+      response.token
+    );
+
+    login(response);
+
+    setFormData({
+      email: "",
+      password: ""
+    });
+
+    navigate("/dashboard");
 
   } catch (err) {
 
@@ -67,9 +79,12 @@ navigate("/dashboard");
   } finally {
 
     setLoading(false);
+
   }
 
 };
+
+
 
   return (
 

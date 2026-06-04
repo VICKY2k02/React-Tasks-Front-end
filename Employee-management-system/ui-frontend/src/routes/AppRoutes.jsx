@@ -84,17 +84,19 @@ const AppRoutes = () => {
         }
       />
 
-      <Route
-        path="/settings"
-        element={
-          <ProtectedRoute
-            user={user}
-            role="admin"
-          >
-            <Settings />
-          </ProtectedRoute>
-        }
-      />
+
+
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute
+                user={user}
+                // role="user"
+              >
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
 
     </Route>
 

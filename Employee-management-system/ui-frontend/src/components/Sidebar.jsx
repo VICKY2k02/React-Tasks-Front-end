@@ -46,7 +46,9 @@ const Sidebar = () => {
           Employees
         </NavLink>
 
-        {/* Admin Only */}
+
+
+              {/* Admin Only */}
         {user?.role === "admin" && (
           <>
             <NavLink to="/departments">
@@ -64,6 +66,14 @@ const Sidebar = () => {
               Settings
             </NavLink>
           </>
+        )}
+
+        {/* User Only */}
+        {user?.role === "user" && (
+          <NavLink to="/settings">
+            <FaCog />
+            Settings
+          </NavLink>
         )}
 
       </nav>

@@ -37,6 +37,7 @@ from app.routes.employee_routes import router as employee_router
 
 from app.routes.auth_routes import router as auth_router
 
+from app.routes.settings_routes import router as settings_router
 
 # CREATE TABLES
 Base.metadata.create_all(bind=engine)
@@ -66,3 +67,8 @@ app.include_router(auth_router)
 def startup_event():
 
     print("Backend Successfully Running...")
+
+
+
+#settings router
+app.include_router(settings_router)

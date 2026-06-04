@@ -18,10 +18,25 @@ export const signupUser = async(data)=>{
   return response.data;
 };
 
-export const forgotPassword = async(data)=>{
+
+
+export const forgotPassword = async (data) => {
   const response = await axios.put(
-    `${API_URL}/forgot-password`,
+   "http://127.0.0.1:8000/forgot-password",
     data
   );
   return response.data;
+};
+
+export const getUserByEmail = async (
+  email
+) => {
+
+  const response =
+    await axios.get(
+      `http://127.0.0.1:8000/user/${email}`
+    );
+
+  return response.data;
+
 };

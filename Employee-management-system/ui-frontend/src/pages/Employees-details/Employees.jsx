@@ -156,7 +156,6 @@ const handleStatusChange = async (
   employeeId,
   status
 ) => {
-
   try {
 
     await updateEmployeeStatus(
@@ -167,12 +166,15 @@ const handleStatusChange = async (
     setEmployees((prev) =>
       prev.map((emp) =>
         emp.id === employeeId
-          ? {
-              ...emp,
-              status
-            }
+          ? { ...emp, status }
           : emp
       )
+    );
+
+    setSelectedEmployee((prev) =>
+      prev && prev.id === employeeId
+        ? { ...prev, status }
+        : prev
     );
 
   } catch (error) {
@@ -181,7 +183,6 @@ const handleStatusChange = async (
 
   }
 };
-
 
 
 // HANDLE EDIT

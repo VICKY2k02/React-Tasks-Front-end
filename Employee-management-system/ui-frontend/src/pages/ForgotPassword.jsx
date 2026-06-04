@@ -58,11 +58,13 @@ const ForgotPassword = () => {
       }, 1500);
 
     } catch (error) {
+  console.log(error.response?.data);
 
-      setMessage(
-        "Failed to update password"
-      );
-    }
+  setMessage(
+    error.response?.data?.detail ||
+    "Failed to update password"
+  );
+}
   };
 
   return (

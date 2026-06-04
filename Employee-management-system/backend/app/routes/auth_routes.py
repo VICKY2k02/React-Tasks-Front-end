@@ -54,6 +54,8 @@ def signup(data: SignupData):
         "success": True,
         "message": "Account created successfully"
     }
+
+    
 @router.post("/login")
 def login(data: LoginData):
 
@@ -92,14 +94,36 @@ def login(data: LoginData):
 
 
 
+# ForgotPassword
 
 @router.put("/forgot-password")
 def forgot_password(data: ForgotPasswordData):
 
+    print("Forgot Password Email:", data.email)
+    print("Current Users:", users)
+
     for user in users:
-        if user["email"] == data.email:
+        if user["email"].lower() == data.email.lower():
             user["password"] = data.new_password
-            return {"message": "Password updated successfully"}
+
+            return {
+                "message": "Password updated successfully"
+            }
+
+    raise HTTPException(
+        status_code=404,
+        detail="User not found"
+    )
+
+
+@router.get("/user/{email}")
+def get_user(email: str):
+
+    for user in users:
+
+        if user["email"] == email:
+
+            return user
 
     raise HTTPException(
         status_code=404,

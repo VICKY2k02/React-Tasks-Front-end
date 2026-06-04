@@ -87,3 +87,67 @@ export const updateEmployee = async (
 };
 
 
+export const requestRoleChange = async (data) => {
+
+  const response = await axios.post(
+    "http://127.0.0.1:8000/request-role-change",
+    data
+  );
+
+  return response.data;
+};
+
+
+export const getRoleRequests = async (
+  adminEmail
+) => {
+
+  const response =
+    await axios.get(
+      `http://127.0.0.1:8000/role-requests/${adminEmail}`
+    );
+
+  return response.data;
+
+};
+export const approveRoleRequest = async (
+  userEmail
+) => {
+
+  const response =
+    await axios.post(
+      "http://127.0.0.1:8000/approve-role-request",
+      userEmail,
+      {
+        headers: {
+          "Content-Type":
+            "application/json"
+        }
+      }
+    );
+
+  return response.data;
+};
+
+
+
+export const rejectRoleRequest =
+  async (userEmail) => {
+
+  const response = await axios.post(
+    "http://127.0.0.1:8000/reject-role-request",
+    userEmail,
+    {
+      headers: {
+        "Content-Type":
+          "application/json"
+      }
+    }
+  );
+
+  return response.data;
+};
+
+
+
+
