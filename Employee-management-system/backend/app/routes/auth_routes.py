@@ -11,12 +11,21 @@ users = [
     {
         "email": "admin@gmail.com",
         "password": "admin123",
-        "role": "admin"
+        "role": "admin",
+        "company_id": "1"
     },
     {
         "email": "user@gmail.com",
         "password": "user123",
-        "role": "user"
+        "role": "user",
+        "company_id": "1"
+    },
+
+       {
+        "email": "admin2@gmail.com",
+        "password": "admin123",
+        "role": "admin",
+        "company_id": 2
     }
 ]
 
@@ -24,6 +33,7 @@ class SignupData(BaseModel):
     email: str
     password: str
     role: str
+    company_id: int
 
 class LoginData(BaseModel):
     email: str
@@ -38,16 +48,25 @@ class ForgotPasswordData(BaseModel):
 def signup(data: SignupData):
 
     for user in users:
-        if user["email"] == data.email:
+
+        if user["email"].lower() == data.email.lower():
+
+            company_name = (
+                "Company A"
+                if user["company_id"] == 1
+                else "Company B"
+            )
+
             raise HTTPException(
                 status_code=400,
-                detail="User already has an account"
+                detail=f"User already exists in {company_name}"
             )
 
     users.append({
         "email": data.email,
         "password": data.password,
-        "role": data.role
+        "role": data.role,
+        "company_id": data.company_id
     })
 
     return {
@@ -74,6 +93,7 @@ def login(data: LoginData):
                 {
                     "email": user["email"],
                     "role": user["role"],
+                    "company_id": user.get("company_id", 1),
                     "exp": datetime.datetime.utcnow()
                     + datetime.timedelta(hours=1)
                 },
@@ -84,7 +104,8 @@ def login(data: LoginData):
             return {
                 "token": token,
                 "role": user["role"],
-                "email": user["email"]
+                "email": user["email"],
+                "company_id": user.get("company_id", 1)
             }
 
     raise HTTPException(

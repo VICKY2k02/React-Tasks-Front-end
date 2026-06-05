@@ -1,4 +1,5 @@
 import React from "react";
+// import { FaSearch } from "react-icons/fa";
 
 const SearchFilter = ({
   search,
@@ -8,7 +9,7 @@ const SearchFilter = ({
 }) => {
   return (
     <div className="search-filter">
-
+      {/* <FaSearch className="search-icon" /> */}
       <input
         type="text"
         placeholder="Search employee..."

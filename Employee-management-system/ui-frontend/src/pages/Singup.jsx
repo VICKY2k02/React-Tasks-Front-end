@@ -9,7 +9,8 @@ const Signup = () => {
     email:"",
     password:"",
     confirmPassword: "",
-    role:"user"
+    role:"user",
+    company_id: 1
   });
 
   const [errors, setErrors] = useState({});
@@ -52,7 +53,8 @@ const Signup = () => {
     await signupUser({
       email: formData.email,
       password: formData.password,
-      role: formData.role
+      role: formData.role,
+      company_id: Number(formData.company_id)
     });
 
     alert("Signup Successful");
@@ -61,24 +63,19 @@ const Signup = () => {
 
   } catch (error) {
 
-  if (
-    error.response?.data?.detail ===
-    "User already has an account"
-  ) {
+  if (error.response?.data?.detail) {
 
-    setMessage(
-      "User already has an account. Please login."
-    );
+  alert(error.response.data.detail);
 
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
+  setMessage(
+    error.response.data.detail
+  );
 
-  } else {
+} else {
 
-    setMessage("Signup Failed");
+  setMessage("Signup Failed");
 
-  }
+}
 }
 };
 
@@ -123,6 +120,19 @@ return (
       >
         <option value="user">User</option>
         <option value="admin">Admin</option>
+      </select>
+
+      <select
+        name="company_id"
+        onChange={handleChange}
+      >
+        <option value="1">
+          Company A
+        </option>
+
+        <option value="2">
+          Company B
+        </option>
       </select>
 
       <button type="submit">

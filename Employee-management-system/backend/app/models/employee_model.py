@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from app.database.connection import Base
 
 class Employee(Base):
@@ -17,5 +17,10 @@ class Employee(Base):
     attendance = Column(String, nullable=False)
     
     status = Column(String, nullable=False)
+
+    company_id = Column(
+        Integer,
+        nullable=False
+    )
 
 

@@ -60,6 +60,11 @@ const handleLogin = async (e) => {
       response.token
     );
 
+    localStorage.setItem(
+      "company_id",
+      response.company_id
+    );
+
     login(response);
 
     setFormData({

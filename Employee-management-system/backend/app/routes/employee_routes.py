@@ -1,31 +1,15 @@
-from fastapi import APIRouter, Depends
-
+from fastapi import APIRouter, Depends, Header, HTTPException
 from sqlalchemy.orm import Session
 
 from app.database.connection import SessionLocal
-
 from app.models.employee_model import Employee
-
-from app.schemas.employee_schema import (
-    EmployeeCreate,
-    EmployeeResponse
-)
-
-from app.services.employee_services import (
-    get_all_employees,
-    create_employee,
-    delete_employee,
-    update_employee_status,
-    update_employee
-)
+from app.schemas.employee_schema import EmployeeCreate
 
 router = APIRouter()
 
 
 # DATABASE CONNECTION
-
 def get_db():
-
     db = SessionLocal()
 
     try:
@@ -35,27 +19,57 @@ def get_db():
         db.close()
 
 
-# GET EMPLOYEES
+# GET COMPANY ID FROM REQUEST HEADER
+def get_company_id(
+    company_id: int = Header(...)
+):
+    return company_id
+
+
+# GET ALL EMPLOYEES
 
 @router.get("/employees")
+def fetch_employees(
+    company_id: int = Depends(get_company_id),
+    db: Session = Depends(get_db)
+):
+    return db.query(Employee).filter(
+        Employee.company_id == company_id
+    ).all()
 
-def fetch_employees(db: Session = Depends(get_db)):
-
-    return get_all_employees(db)
+    return employees
 
 
 # ADD EMPLOYEE
 
 @router.post("/employees")
-def create_employee(employee: EmployeeCreate, db: Session = Depends(get_db)):
+def create_employee(
+    employee: EmployeeCreate,
+    company_id: int = Header(...),
+    db: Session = Depends(get_db)
+):
 
+    # CHECK DUPLICATE EMPLOYEE
+    existing_employee = db.query(Employee).filter(
+        Employee.name == employee.name,
+        Employee.email == employee.email
+    ).first()
+
+    if existing_employee:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Employee already exists in Company {existing_employee.company_id}"
+        )
+
+    # CREATE EMPLOYEE
     new_employee = Employee(
         name=employee.name,
         email=employee.email,
         department=employee.department,
         designation=employee.designation,
         attendance=employee.attendance,
-        status=employee.status
+        status=employee.status,
+        company_id=company_id
     )
 
     db.add(new_employee)
@@ -68,23 +82,30 @@ def create_employee(employee: EmployeeCreate, db: Session = Depends(get_db)):
         "data": new_employee
     }
 
+
 # DELETE EMPLOYEE
-
 @router.delete("/employees/{employee_id}")
-
 def remove_employee(
     employee_id: int,
+    company_id: int = Depends(get_company_id),
     db: Session = Depends(get_db)
 ):
 
-    employee = delete_employee(db, employee_id)
+    employee = db.query(Employee).filter(
+        Employee.id == employee_id,
+        Employee.company_id == company_id
+    ).first()
 
     if not employee:
 
-        return {
-            "success": False,
-            "message": "Employee not found"
-        }
+        raise HTTPException(
+            status_code=404,
+            detail="Employee not found"
+        )
+
+    db.delete(employee)
+
+    db.commit()
 
     return {
         "success": True,
@@ -93,59 +114,73 @@ def remove_employee(
 
 
 # UPDATE EMPLOYEE
-
-
 @router.put("/employees/{employee_id}")
-
 def edit_employee(
     employee_id: int,
-    employee: EmployeeCreate,
+    employee_data: EmployeeCreate,
+    company_id: int = Depends(get_company_id),
     db: Session = Depends(get_db)
 ):
 
-    updated_employee = update_employee(
-        db,
-        employee_id,
-        employee
-    )
+    employee = db.query(Employee).filter(
+        Employee.id == employee_id,
+        Employee.company_id == company_id
+    ).first()
 
-    if not updated_employee:
+    if not employee:
 
-        return {
-            "success": False,
-            "message": "Employee not found"
-        }
+        raise HTTPException(
+            status_code=404,
+            detail="Employee not found"
+        )
+
+    employee.name = employee_data.name
+    employee.email = employee_data.email
+    employee.department = employee_data.department
+    employee.designation = employee_data.designation
+    employee.attendance = employee_data.attendance
+    employee.status = employee_data.status
+
+    db.commit()
+
+    db.refresh(employee)
 
     return {
         "success": True,
         "message": "Employee updated successfully",
-        "data": updated_employee
+        "data": employee
     }
 
-# UPDATE STATUS
 
+# UPDATE EMPLOYEE STATUS
 @router.put("/employees/{employee_id}/status")
-
 def update_status(
     employee_id: int,
     status: str,
+    company_id: int = Depends(get_company_id),
     db: Session = Depends(get_db)
 ):
 
-    employee = update_employee_status(
-        db,
-        employee_id,
-        status
-    )
+    employee = db.query(Employee).filter(
+        Employee.id == employee_id,
+        Employee.company_id == company_id
+    ).first()
 
     if not employee:
 
-        return {
-            "success": False,
-            "message": "Employee not found"
-        }
+        raise HTTPException(
+            status_code=404,
+            detail="Employee not found"
+        )
 
-    return employee
+    employee.status = status
 
+    db.commit()
 
+    db.refresh(employee)
 
+    return {
+        "success": True,
+        "message": "Status updated successfully",
+        "data": employee
+    }

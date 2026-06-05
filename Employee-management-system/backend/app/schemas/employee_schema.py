@@ -19,6 +19,7 @@ class EmployeeResponse(BaseModel):
     designation: str
     attendance: str
     status: str
+    company_id: int
 
 
     class Config:

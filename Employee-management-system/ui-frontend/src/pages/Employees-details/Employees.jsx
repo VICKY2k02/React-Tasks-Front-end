@@ -104,9 +104,15 @@ const handleAddEmployee = async (employeeData) => {
 
   } catch (error) {
 
-    console.log("ADD ERROR:", error);
+  const message =
+    error.response?.data?.detail ||
+    "Employee Add Failed";
 
-  }
+  alert(message);
+
+  console.log("ADD ERROR:", error);
+
+}
 
 };
 

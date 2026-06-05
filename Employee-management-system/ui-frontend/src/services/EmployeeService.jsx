@@ -3,12 +3,21 @@ import axios from "axios";
 const API_URL = "http://127.0.0.1:8000/employees";
 
 
+const getHeaders = () => ({
+  "company-id": localStorage.getItem("company_id")
+});
+
 // GET EMPLOYEES
 export const getEmployees = async () => {
 
   try {
 
-    const response = await axios.get(API_URL);
+    const response = await axios.get(
+      API_URL,
+      {
+        headers: getHeaders()
+      }
+    );
 
     return response.data;
 
@@ -30,7 +39,10 @@ export const addEmployee = async (employeeData) => {
 
     const response = await axios.post(
       API_URL,
-      employeeData
+      employeeData,
+      {
+        headers: getHeaders()
+      }
     );
 
     return response.data;
@@ -48,10 +60,12 @@ export const addEmployee = async (employeeData) => {
 
 export const deleteEmployee = async (id) => {
 
-  const response = await axios.delete(
-    `http://127.0.0.1:8000/employees/${id}`
-  );
-
+  const response =  axios.delete(
+      `http://127.0.0.1:8000/employees/${id}`,
+      {
+        headers: getHeaders()
+      }
+    );
   return response.data;
 };
 
@@ -63,10 +77,16 @@ export const updateEmployeeStatus = async (
   status
 ) => {
 
-  const response = await axios.put(
-    `http://127.0.0.1:8000/employees/${id}/status?status=${status}`
+  const response = axios.put(
+    `http://127.0.0.1:8000/employees/${id}/status?status=${status}`,
+    {},
+    {
+      headers: getHeaders()
+    }
   );
-
+// await axios.put(
+//     `http://127.0.0.1:8000/employees/${id}/status?status=${status}`
+//   );
   return response.data;
 };
 
@@ -78,11 +98,13 @@ export const updateEmployee = async (
   employeeData
 ) => {
 
-  const response = await axios.put(
+  const response=axios.put(
     `http://127.0.0.1:8000/employees/${id}`,
-    employeeData
+    employeeData,
+    {
+      headers: getHeaders()
+    }
   );
-
   return response.data;
 };
 
