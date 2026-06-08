@@ -987,9 +987,9 @@ body.dark .btn {
 
 /* Settings Page */
 
-.settings-page {
+/* .settings-page {
   padding: 25px;
-}
+} */
 
 .settings-title {
   font-size: 28px;
@@ -1015,7 +1015,13 @@ body.dark .btn {
     background: #fff;
     border-radius: 15px;
     padding: 20px;
-    width: 30%;
+    width: 100%;
+}
+
+
+body.dark .request-card{
+  background-color: #1f2937;
+  color: white;
 }
 
 .request-card:hover {
@@ -1025,11 +1031,11 @@ body.dark .btn {
 .request-card p {
   margin: 10px 0;
   font-size: 15px;
-  color: #444;
+  color: #9e9c9c;
 }
 
 .request-card strong {
-  color: #111;
+  color: #fefefe;
 }
 
 
@@ -1148,4 +1154,31 @@ body.dark  .form-card{
 
 .role{
   margin-bottom: 10px;
+}
+
+
+
+
+
+
+.audit-settings {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #1f2937;
+}
+
+.clear-audit-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 2%;
+}
+
+.clear-audit-btn:hover {
+  opacity: 0.9;
 }

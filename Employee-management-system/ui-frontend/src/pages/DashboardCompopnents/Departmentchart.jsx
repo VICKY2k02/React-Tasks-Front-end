@@ -46,7 +46,11 @@ const DepartmentChart = ({ employees }) => {
           <Pie
             data={data}
             dataKey="value"
+            cx="50%"
+            cy="50%"
+            innerRadius={60}
             outerRadius={100}
+            paddingAngle={0}
           >
             {
               data.map((entry,index)=>(

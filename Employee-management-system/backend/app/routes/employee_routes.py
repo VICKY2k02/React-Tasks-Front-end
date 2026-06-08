@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.database.connection import SessionLocal
 from app.models.employee_model import Employee
 from app.schemas.employee_schema import EmployeeCreate
+from app.util.audit_logger import create_audit_log
 
 router = APIRouter()
 
@@ -76,6 +77,15 @@ def create_employee(
     db.commit()
     db.refresh(new_employee)
 
+    create_audit_log(
+        db=db,
+        user_name="Admin",
+        action="Employee Created",
+        related_user=new_employee.name,
+        company_id=company_id
+    )
+
+
     return {
         "success": True,
         "message": "Employee created successfully",
@@ -102,6 +112,14 @@ def remove_employee(
             status_code=404,
             detail="Employee not found"
         )
+
+    create_audit_log(
+        db=db,
+        user_name="Admin",
+        action="Employee Deleted",
+        related_user=employee.name,
+        company_id=company_id
+    )
 
     db.delete(employee)
 
@@ -144,6 +162,14 @@ def edit_employee(
     db.commit()
 
     db.refresh(employee)
+
+    create_audit_log(
+        db=db,
+        user_name="Admin",
+        action="Employee Updated",
+        related_user=employee.name,
+        company_id=company_id
+    )
 
     return {
         "success": True,

@@ -292,4 +292,13 @@ body.dark .bell-icon{
 
 .company-name{
   font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+        height: 35px;
+}
+
+body.dark .company-name {
+   background: #0f172a;
+  color: white;
 }

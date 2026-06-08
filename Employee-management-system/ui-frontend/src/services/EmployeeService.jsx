@@ -3,9 +3,19 @@ import axios from "axios";
 const API_URL = "http://127.0.0.1:8000/employees";
 
 
-const getHeaders = () => ({
-  "company-id": localStorage.getItem("company_id")
-});
+// const getHeaders = () => ({
+//   "company-id": localStorage.getItem("company_id")
+// });
+const getHeaders = () => {
+
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
+
+  return {
+    "company-id": user?.company_id
+  };
+};
 
 // GET EMPLOYEES
 export const getEmployees = async () => {
@@ -171,5 +181,61 @@ export const rejectRoleRequest =
 };
 
 
+// Audit Logs
 
+export const getAuditLogs = async () => {
+
+  const response = await axios.get(
+    "http://127.0.0.1:8000/audit-logs",
+    {
+      headers: getHeaders()
+    }
+  );
+
+  return response.data;
+};
+
+
+
+export const clearAuditLogs = async () => {
+
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
+
+  const response = await axios.delete(
+    "http://127.0.0.1:8000/audit-logs/clear",
+    {
+      headers: {
+        "company-id": user.company_id
+      }
+    }
+  );
+
+  return response.data;
+};
+
+
+
+export const getDashboardStats = async () => {
+
+  const response = await axios.get(
+    "http://127.0.0.1:8000/dashboard-stats",
+    {
+      headers: getHeaders()
+    }
+  );
+
+  return response.data;
+};
+
+
+export const getRoleStats = async () => {
+
+  const response = await axios.get(
+    "http://127.0.0.1:8000/role-stats"
+  );
+
+  return response.data;
+};
 

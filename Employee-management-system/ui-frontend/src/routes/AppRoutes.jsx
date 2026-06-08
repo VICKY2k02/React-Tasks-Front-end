@@ -14,6 +14,7 @@ import ForgotPassword from "../pages/ForgotPassword";
 import ProtectedRoute from "../components/ProtectedRoute";
 import DashboardLayout from "../components/DashboardLayout";
 
+import AuditLogs from "../pages/AuditLogs/AuditLogs";
 const AppRoutes = () => {
   const auth = useContext(AuthContext);
 
@@ -80,6 +81,18 @@ const AppRoutes = () => {
             role="admin"
           >
             <Attendance />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/audit-logs"
+        element={
+          <ProtectedRoute
+            user={user}
+            role="admin"
+          >
+            <AuditLogs />
           </ProtectedRoute>
         }
       />

@@ -2,64 +2,36 @@ import {
   FaUsers,
   FaUserCheck,
   FaBuilding,
-  FaClipboardCheck
+   FaClipboardCheck
 } from "react-icons/fa";
+const DashboardStats = ({ stats }) => {
 
-const DashboardStats = ({ employees }) => {
-
-  const totalEmployees = employees.length;
-
-  const activeEmployees =
-    employees.filter(
-      emp => emp.status === "Active"
-    ).length;
-
-  const departments =
-    [...new Set(
-      employees.map(
-        emp => emp.department
-      )
-    )].length;
-
-    const attendance =
-    employees.length > 0
-    ? (
-         employees.reduce(
-            (sum, emp) =>
-                sum +
-            parseFloat(emp.attendance.replace("%","")),
-            0
-        ) / employees.length
-    ).toFixed(1): 0;
-
-    
   const cards = [
     {
       title: "Total Employees",
-      value: totalEmployees,
+      value: stats.totalEmployees,
       icon: <FaUsers />
     },
     {
       title: "Active Employees",
-      value: activeEmployees,
+      value: stats.activeEmployees,
       icon: <FaUserCheck />
     },
     {
       title: "Departments",
-      value: departments,
+      value: stats.departments,
       icon: <FaBuilding />
     },
     {
-      title: "Attendance %",
-      value: `${attendance}%`,
+      title: "Pending Requests",
+      value: stats.pendingRequests,
       icon: <FaClipboardCheck />
     }
   ];
 
   return (
     <div className="stats-grid">
-
-      {cards.map((card,index)=>(
+      {cards.map((card, index) => (
         <div
           key={index}
           className="stat-card"
@@ -74,7 +46,6 @@ const DashboardStats = ({ employees }) => {
           </div>
         </div>
       ))}
-
     </div>
   );
 };

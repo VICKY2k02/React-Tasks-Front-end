@@ -2,7 +2,7 @@ import "./styles.css";
 
 import { useEffect, useState } from "react";
 
-import { getEmployees }from "../services/EmployeeService";
+import { getEmployees, getDashboardStats }from "../services/EmployeeService";
 
 import DashboardStats from "./DashboardCompopnents/DashboardStats";
 
@@ -12,27 +12,56 @@ import AttendanceChart from "./DashboardCompopnents/AttendanceChart";
 
 import ActivityChart from "./DashboardCompopnents/ActivityChart";
 
+import RoleChart from "./DashboardCompopnents/RoleChart";
+
 function Dashboard() {
+  // const [stats, setStats] = useState({});
+  const [employees, setEmployees] = useState([]);
+  const [stats, setStats] = useState({
+  totalEmployees: 0,
+  activeEmployees: 0,
+  departments: 0,
+  pendingRequests: 0
+});
 
-  const [employees,
-    setEmployees] = useState([]);
 
-  useEffect(() => {
+ const loadDashboardData = async () => {
 
-    loadEmployees();
+  const employeeData =
+    await getEmployees();
 
-  }, []);
+  setEmployees(employeeData);
 
-  const loadEmployees =
-    async () => {
+  const statsData =
+    await getDashboardStats();
 
-      const data =
-        await getEmployees();
+  setStats(statsData);
 
-      setEmployees(data);
+};
 
-    };
+useEffect(() => {
 
+  const refreshDashboard = () => {
+    loadDashboardData();
+  };
+
+  loadDashboardData();
+
+  window.addEventListener(
+    "dashboardRefresh",
+    refreshDashboard
+  );
+
+  return () => {
+
+    window.removeEventListener(
+      "dashboardRefresh",
+      refreshDashboard
+    );
+
+  };
+
+}, []);
   return (
 
     <div className="dashboard-wrapper">
@@ -54,7 +83,8 @@ function Dashboard() {
       </div>
 
       <DashboardStats
-        employees={employees}
+        // employees={employees}
+        stats={stats}
       />
 
       <div
@@ -71,9 +101,17 @@ function Dashboard() {
 
       </div>
 
+      <div  className="dashboard-content">
+        
       <ActivityChart
         employees={employees}
       />
+
+      <RoleChart
+        employees={employees}
+      />
+      </div>
+
 
     </div>
   );

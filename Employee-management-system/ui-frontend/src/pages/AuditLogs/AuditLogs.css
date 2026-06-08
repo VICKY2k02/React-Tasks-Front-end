@@ -1,0 +1,139 @@
+/* Audit Logs Page */
+
+.auditlogs-container {
+  padding: 25px;
+  background: #f5f7fb;
+  min-height: 100vh;
+}
+
+.auditlogs-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* Table Card */
+
+.auditlogs-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  overflow-x: auto;
+}
+
+/* Table */
+
+.auditlogs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.auditlogs-table thead {
+  background: #4f46e5;
+  color: white;
+}
+
+.auditlogs-table th {
+  padding: 14px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.auditlogs-table td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+/* Action Badges */
+
+.action-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Employee Actions */
+
+.created {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.updated {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.deleted {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Role Actions */
+
+.approved {
+  background: #ccfbf1;
+  color: #0f766e;
+}
+
+.rejected {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.requested {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+/* Empty State */
+
+.no-logs {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 16px;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+  .auditlogs-container {
+    padding: 15px;
+  }
+
+  .auditlogs-title {
+    font-size: 22px;
+  }
+
+  .auditlogs-table th,
+  .auditlogs-table td {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+}
+
+body.dark  .auditlogs-card{
+   background-color: #1e293b;
+    color: white;
+    border-radius: 10px;
+}
+
+body.dark .auditlogs-title{
+    color: white;
+}
+
+body.dark .auditlogs-container{
+     background-color: #1e293b;
+    color: white;
+    border-radius: 10px;
+
+}

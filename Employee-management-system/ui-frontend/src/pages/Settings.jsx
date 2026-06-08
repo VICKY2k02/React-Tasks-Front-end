@@ -4,7 +4,8 @@ import {
   requestRoleChange,
   getRoleRequests,
   approveRoleRequest,
-  rejectRoleRequest
+  rejectRoleRequest,
+  clearAuditLogs
 } from "../services/EmployeeService";
 
 import { AuthContext } from "../context/AuthContext";
@@ -98,57 +99,86 @@ const handleSubmit = async (e) => {
 
 };
 
-  const handleApprove = async (
-    userEmail
-  ) => {
+ const handleApprove = async (
+  userEmail
+) => {
 
-    try {
+  try {
 
-      const response =
-        await approveRoleRequest(
-          userEmail
-        );
-
-      alert(response.message);
-
-      loadRequests();
-
-    } catch (error) {
-
-      alert(
-        error.response?.data?.detail ||
-        "Failed to approve request"
+    const response =
+      await approveRoleRequest(
+        userEmail
       );
 
-    }
+    alert(response.message);
 
-  };
+    loadRequests();
 
-  const handleReject = async (
-    userEmail
-  ) => {
+    window.dispatchEvent(
+      new Event("dashboardRefresh")
+    );
 
-    try {
+  } catch (error) {
 
-      const response =
-        await rejectRoleRequest(
-          userEmail
-        );
+    alert(
+      error.response?.data?.detail
+    );
 
-      alert(response.message);
+  }
+};
+const handleReject = async (
+  userEmail
+) => {
 
-      loadRequests();
+  try {
 
-    } catch (error) {
-
-      alert(
-        error.response?.data?.detail ||
-        "Failed to reject request"
+    const response =
+      await rejectRoleRequest(
+        userEmail
       );
 
-    }
+    alert(response.message);
 
-  };
+    loadRequests();
+
+    window.dispatchEvent(
+      new Event("dashboardRefresh")
+    );
+
+  } catch (error) {
+
+    alert(
+      error.response?.data?.detail
+    );
+
+  }
+};
+
+      const handleClearAuditLogs = async () => {
+
+  const confirmClear = window.confirm(
+    "Are you sure you want to clear all audit logs?"
+  );
+
+  if (!confirmClear) return;
+
+  try {
+
+    const response =
+      await clearAuditLogs();
+
+    alert(response.message);
+
+  } catch (error) {
+
+    alert(
+      error.response?.data?.detail ||
+      "Failed to clear audit logs"
+    );
+
+  }
+};
+
 
   return (
 
@@ -219,6 +249,7 @@ const handleSubmit = async (e) => {
 
                   </div>
 
+
                 </div>
 
               )
@@ -272,7 +303,24 @@ const handleSubmit = async (e) => {
       )}
 
     </div>
-    </div>
+            {user?.role === "admin" && (
+
+          <div className="audit-settings">
+
+                    <h2>Audit Logs</h2>
+
+                    <button
+                      className="clear-audit-btn"
+                      onClick={handleClearAuditLogs}
+                    >
+                      Clear Audit Logs
+                    </button>
+
+                  </div>
+
+                )}
+            </div>
+    
 
   );
 

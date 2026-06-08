@@ -8,7 +8,8 @@ import {
   FaBuilding,
   FaClipboardCheck,
   FaCog,
-  FaSignOutAlt
+  FaSignOutAlt,
+  FaHistory
 } from "react-icons/fa";
 
 const Sidebar = () => {
@@ -61,11 +62,17 @@ const Sidebar = () => {
               Attendance
             </NavLink>
 
+            <NavLink to="/audit-logs">
+              <FaHistory />
+              Audit Logs
+            </NavLink>
+
             <NavLink to="/settings">
               <FaCog />
               Settings
             </NavLink>
           </>
+
         )}
 
         {/* User Only */}

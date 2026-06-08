@@ -119,14 +119,20 @@ const handleAddEmployee = async (employeeData) => {
 
 // Delete handle
 
+
 const handleDeleteEmployee = async (id) => {
 
   const confirmDelete = window.confirm(
-      "Are you sure?");
+    "Are you sure?"
+  );
+
+  if (!confirmDelete) return;
 
   try {
 
     await deleteEmployee(id);
+
+    alert("Employee deleted");
 
     fetchEmployees();
 
@@ -134,27 +140,9 @@ const handleDeleteEmployee = async (id) => {
 
     console.log(error);
 
+    alert("Delete failed");
   }
-
-
-  if (!confirmDelete) return;
-
-    try {
-
-      await deleteEmployee(id);
-
-      alert("Employee deleted");
-
-      fetchEmployees();
-
-    } catch (error) {
-
-      alert("Delete failed");
-    }
-
 };
-
-
 
  // ADD STATUS HANDLER
 
@@ -244,6 +232,8 @@ const filteredEmployees = Array.isArray(employees)
       );
     })
   : [];
+
+  
   // Pagination
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;

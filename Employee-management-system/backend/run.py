@@ -13,6 +13,10 @@ from app.routes.settings_routes import router as settings_router
 from app.models.company import Company
 from app.models.employee_model import Employee
 
+from app.routes.audit_routes import router as audit_router
+from app.routes import dashboard_routes
+
+
 # CREATE TABLES
 Base.metadata.create_all(bind=engine)
 
@@ -34,6 +38,8 @@ app.include_router(employee_router)
 
 # AUTH ROUTES
 app.include_router(auth_router)
+app.include_router(audit_router)
+app.include_router(dashboard_routes.router)
 
 
 # SUCCESS MESSAGE
@@ -46,3 +52,4 @@ def startup_event():
 
 #settings router
 app.include_router(settings_router)
+
