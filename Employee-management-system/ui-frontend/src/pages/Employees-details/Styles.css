@@ -194,27 +194,56 @@ body.dark .stats-card {
 }
 
 
-.delete-btn,
-.edit-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
+
+
+.action-cell {
+  position: relative;
+}
+
+.menu-btn {
   border: none;
+  background: transparent;
   cursor: pointer;
-  border-radius: 5px;
+  font-size: 18px;
+  padding: 6px;
 }
 
-.delete-btn {
-  background: #ffffff;
-  color: rgb(0, 0, 0);
+.action-menu {
+  position: absolute;
+  right: -73px;
+  top: 25px;
+  /* background: #fff; */
+  border-radius: 8px;
+  min-width: 120px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  z-index: 100;
+  overflow: hidden;
 }
 
-.edit-btn {
-  background: #ffffff;
-  color: rgb(0, 0, 0);
+.action-menu button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  text-align: left;
 }
 
+body.dark .ed-btn:hover {
+  background-color: #f3f4f6;
+  color: black;
+}
+
+body.dark 
+.action-menu button{
+  background-color: #1f2937;
+  color: white;
+}
+
+body.dark .icon{
+  background-color: #1f2937;
+  color: white;
+}
 .active-btn {
   background: green;
   color: white;

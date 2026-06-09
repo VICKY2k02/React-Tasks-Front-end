@@ -90,14 +90,14 @@ useEffect(() => {
       <div
         className="dashboard-content"
       >
-
+        <AttendanceChart
+          employees={employees}
+        />
         <DepartmentChart
           employees={employees}
         />
 
-        <AttendanceChart
-          employees={employees}
-        />
+
 
       </div>
 

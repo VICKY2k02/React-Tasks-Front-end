@@ -53,17 +53,26 @@ def get_dashboard_stats(
     }
 
 
+# Role stats
+
 @router.get("/role-stats")
-def get_role_stats():
+def get_role_stats(
+    company_id: int = Depends(get_company_id)
+):
+
+    company_users = [
+        user for user in users
+        if user["company_id"] == company_id
+    ]
 
     admin_count = len([
-        u for u in users
-        if u["role"] == "admin"
+        user for user in company_users
+        if user["role"] == "admin"
     ])
 
     user_count = len([
-        u for u in users
-        if u["role"] == "user"
+        user for user in company_users
+        if user["role"] == "user"
     ])
 
     return {

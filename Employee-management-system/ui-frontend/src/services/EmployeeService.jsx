@@ -229,11 +229,13 @@ export const getDashboardStats = async () => {
   return response.data;
 };
 
-
 export const getRoleStats = async () => {
 
   const response = await axios.get(
-    "http://127.0.0.1:8000/role-stats"
+    "http://127.0.0.1:8000/role-stats",
+    {
+      headers: getHeaders()
+    }
   );
 
   return response.data;

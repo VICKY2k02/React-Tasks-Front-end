@@ -1,5 +1,7 @@
 from app.models.audit_log import AuditLog
 from app.database.connection import SessionLocal
+
+
 def create_audit_log(
     db,
     user_name,

@@ -1,75 +1,3 @@
-// import {
-//   PieChart,
-//   Pie,
-//   Cell,
-//   Tooltip,
-//   ResponsiveContainer,
-//   Legend
-// } from "recharts";
-
-// const COLORS = [
-//   "#10b981",
-//   "#2563eb"
-// ];
-
-// const RoleChart = () => {
-
-//   const data = [
-//     {
-//       name: "Admin",
-//       value: 2
-//     },
-//     {
-//       name: "User",
-//       value: 2
-//     }
-//   ];
-
-//   return (
-//     <div className="chart-section">
-
-//       <h3>
-//         Employee Count By Role
-//       </h3>
-
-//       <ResponsiveContainer
-//         width="100%"
-//         height={300}
-//       >
-//         <PieChart>
-
-//           <Pie
-//             data={data}
-//             dataKey="value"
-//             cx="50%"
-//             cy="50%"
-//             innerRadius={60}
-//             outerRadius={100}
-//             paddingAngle={0}
-//           >
-//             {data.map((entry, index) => (
-//               <Cell
-//                 key={index}
-//                 fill={
-//                   COLORS[
-//                     index % COLORS.length
-//                   ]
-//                 }
-//               />
-//             ))}
-//           </Pie>
-
-//           <Tooltip />
-//           <Legend />
-
-//         </PieChart>
-//       </ResponsiveContainer>
-
-//     </div>
-//   );
-// };
-
-// export default RoleChart;
 import { useEffect, useState } from "react";
 
 import {
@@ -80,8 +8,7 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-import { getRoleStats }
-from "../../services/EmployeeService";
+import { getRoleStats } from "../../services/EmployeeService";
 
 const COLORS = [
   "#10b981",
@@ -93,15 +20,16 @@ const RoleChart = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-
     loadRoleStats();
-
   }, []);
 
-  const loadRoleStats = async () => {
+const loadRoleStats = async () => {
 
-    const stats =
-      await getRoleStats();
+  try {
+
+    const stats = await getRoleStats();
+
+    console.log("ROLE STATS:", stats);
 
     setData([
       {
@@ -113,7 +41,13 @@ const RoleChart = () => {
         value: stats.user
       }
     ]);
-  };
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+};
 
   return (
 
@@ -133,23 +67,22 @@ const RoleChart = () => {
           <Pie
             data={data}
             dataKey="value"
-            innerRadius={60}
             outerRadius={100}
+            innerRadius={50}
           >
 
-            {data.map(
-              (entry,index)=>(
-                <Cell
-                  key={index}
-                  fill={
-                    COLORS[
-                      index %
-                      COLORS.length
-                    ]
-                  }
-                />
-              )
-            )}
+            {data.map((entry, index) => (
+
+              <Cell
+                key={index}
+                fill={
+                  COLORS[
+                    index % COLORS.length
+                  ]
+                }
+              />
+
+            ))}
 
           </Pie>
 

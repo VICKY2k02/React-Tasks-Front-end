@@ -12,19 +12,25 @@ users = [
         "email": "admin@gmail.com",
         "password": "admin123",
         "role": "admin",
-        "company_id": "1"
+        "company_id": 1
     },
     {
         "email": "user@gmail.com",
         "password": "user123",
         "role": "user",
-        "company_id": "1"
+        "company_id": 1
     },
 
        {
         "email": "admin2@gmail.com",
         "password": "admin123",
         "role": "admin",
+        "company_id": 2
+    },
+        {
+        "email": "user2@gmail.com",
+        "password": "user123",
+        "role": "user",
         "company_id": 2
     }
 ]
@@ -150,3 +156,4 @@ def get_user(email: str):
         status_code=404,
         detail="User not found"
     )
+

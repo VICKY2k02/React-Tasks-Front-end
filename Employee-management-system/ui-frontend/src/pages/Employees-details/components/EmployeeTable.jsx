@@ -1,6 +1,6 @@
-import React from "react";
+import { useState } from "react";
 
-import {FaEdit, FaTrash} from "react-icons/fa";
+import {FaEdit, FaTrash, FaEllipsisV} from "react-icons/fa";
 
 const EmployeeTable = ({ employees, 
                           setSelectedEmployee, 
@@ -8,6 +8,8 @@ const EmployeeTable = ({ employees,
                           // handleStatusToggle,
                           handleStatusChange,
                           handleEdit }) => {
+
+const [openMenu, setOpenMenu] = useState(null);
 
   return (
     <table className="employee-table">
@@ -20,7 +22,7 @@ const EmployeeTable = ({ employees,
           <th>Attendance</th>
           <th>Status</th>
           <th>Actions</th>
-          <th>Edit</th>
+          
         </tr>
       </thead>
 
@@ -78,27 +80,45 @@ const EmployeeTable = ({ employees,
 
           </td>
 
+          <td className="action-cell">
 
-          <td>
-                <button
-                    className="delete-btn"
-                    onClick={() =>
-                      handleDeleteEmployee(employee.id)
-                    }
-                  >
-                    <FaTrash />
-                </button>
-          </td>
+            <button
+              className="menu-btn"
+              onClick={() =>
+                setOpenMenu(
+                  openMenu === employee.id
+                    ? null
+                    : employee.id
+                )
+              }
+            >
+              <FaEllipsisV className="icon"/>
+            </button>
 
-          <td>
-                <button
-                    className="edit-btn"
-                    onClick={() =>
-                      handleEdit(employee)
-                    }
-                  >
-                    <FaEdit />
+            {openMenu === employee.id && (
+              <div className="action-menu">
+
+                <button  className="ed-btn"
+                  onClick={() => {
+                    handleEdit(employee);
+                    setOpenMenu(null);
+                  }}
+                >
+                  Edit
                 </button>
+
+                <button  className="ed-btn"
+                  onClick={() => {
+                    handleDeleteEmployee(employee.id);
+                    setOpenMenu(null);
+                  }}
+                >
+                  Delete
+                </button>
+
+              </div>
+            )}
+
           </td>
 
           </tr>

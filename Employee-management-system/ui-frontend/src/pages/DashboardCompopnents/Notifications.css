@@ -182,3 +182,23 @@ body.dark .notification-item p {
   background-color: #1f2937;
 
 }
+
+
+
+
+
+
+.notification-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.mark-read-btn{
+  border:none;
+  background:#2563eb;
+  color:white;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+}

@@ -6,6 +6,7 @@ from app.models.audit_log import AuditLog
 
 router = APIRouter()
 
+
 def get_db():
     db = SessionLocal()
     try:
