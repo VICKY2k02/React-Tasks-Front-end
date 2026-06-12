@@ -15,8 +15,9 @@ from app.models.employee_model import Employee
 
 from app.routes.audit_routes import router as audit_router
 from app.routes import dashboard_routes
-
-
+from app.routes.invitation_routes import router as invitation_router
+from app.routes.member_routes import (router as member_router)
+from app.routes.notification_routes import ( router as notification_router)
 # CREATE TABLES
 Base.metadata.create_all(bind=engine)
 
@@ -40,6 +41,9 @@ app.include_router(employee_router)
 app.include_router(auth_router)
 app.include_router(audit_router)
 app.include_router(dashboard_routes.router)
+app.include_router(invitation_router)
+app.include_router( member_router)
+app.include_router(notification_router)
 
 
 # SUCCESS MESSAGE

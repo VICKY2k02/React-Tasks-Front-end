@@ -1,25 +1,20 @@
 import { useContext, useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { AuthContext } from "../context/AuthContext";
-
-import NotificationBell from
-"../pages/DashboardCompopnents/NotificationBell";
-
-import {
-  getDashboardStats,
-  getAuditLogs
-} from "../services/EmployeeService";
+import NotificationBell from "../pages/DashboardCompopnents/NotificationBell";
+import { getReactivationRequests } from "../services/MemberServices";
+import { getDashboardStats, getAuditLogs } from "../services/EmployeeService";
 
 function Header() {
 
-  const { user } =
-    useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
-  const [pendingRequests,
-    setPendingRequests] = useState(0);
+    const [ reactivationRequests, setReactivationRequests ] = useState([]);
 
-  const [activities,
-    setActivities] = useState([]);
+  const [pendingRequests, setPendingRequests] = useState(0);
+
+  const [activities, setActivities] = useState([]);
+
 
 const companyId = Number(user?.company_id);
 
@@ -30,56 +25,60 @@ const companyName =
     ? "Company B"
     : "Company";
 
-  useEffect(() => {
+    useEffect(() => {
 
+  loadNotifications();
+
+  const refresh = () => {
     loadNotifications();
+  };
 
-    const refresh = () => {
-      loadNotifications();
-    };
+  window.addEventListener(
+    "dashboardRefresh",
+    refresh
+  );
 
-    window.addEventListener(
+  return () => {
+
+    window.removeEventListener(
       "dashboardRefresh",
       refresh
     );
 
-    return () => {
+  };
 
-      window.removeEventListener(
-        "dashboardRefresh",
-        refresh
-      );
+}, []);
 
-    };
+const loadNotifications = async () => {
 
-  }, []);
+  try {
 
-  const loadNotifications =
-    async () => {
+    const requests = await getReactivationRequests();
 
-      try {
+    setReactivationRequests( requests );
 
-        const stats =
-          await getDashboardStats();
+    const stats = await getDashboardStats();
 
-        setPendingRequests(
-          stats.pendingRequests
-        );
+    const logs = await getAuditLogs();
 
-        const logs =
-          await getAuditLogs();
+    setActivities( logs.slice(0, 5) );
 
-        setActivities(
-          logs.slice(0, 5)
-        );
+    const roleRequestCount = stats.pendingRequests;
 
-      } catch (error) {
+    const reactivationCount = requests.filter( req =>
+          req.status === "Pending" ).length;
 
-        console.log(error);
+    const totalCount = roleRequestCount ;
 
-      }
+    setPendingRequests( totalCount );
 
-    };
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
 
   return (
 
@@ -92,12 +91,9 @@ const companyName =
       <div className="header-right">
 
         <NotificationBell
-          pendingRequests={
-            pendingRequests
-          }
-          recentActivities={
-            activities
-          }
+          pendingRequests={ pendingRequests }
+          recentActivities={ activities }
+          reactivationRequests={ reactivationRequests } 
         />
 
         <div className="profile">

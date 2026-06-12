@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import {FaEdit, FaTrash, FaEllipsisV} from "react-icons/fa";
+import { FaEllipsisV} from "react-icons/fa";
 
 const EmployeeTable = ({ employees, 
                           setSelectedEmployee, 
@@ -92,7 +92,7 @@ const [openMenu, setOpenMenu] = useState(null);
                 )
               }
             >
-              <FaEllipsisV className="icon"/>
+              <FaEllipsisV className="icons"/>
             </button>
 
             {openMenu === employee.id && (

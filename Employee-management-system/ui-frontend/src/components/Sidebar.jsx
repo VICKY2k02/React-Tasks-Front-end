@@ -9,7 +9,7 @@ import {
   FaClipboardCheck,
   FaCog,
   FaSignOutAlt,
-  FaHistory
+  FaHistory,
 } from "react-icons/fa";
 
 const Sidebar = () => {
@@ -67,6 +67,11 @@ const Sidebar = () => {
               Audit Logs
             </NavLink>
 
+            <NavLink to="/members">
+              <FaUsers />
+              Members
+            </NavLink>
+
             <NavLink to="/settings">
               <FaCog />
               Settings
@@ -74,6 +79,8 @@ const Sidebar = () => {
           </>
 
         )}
+
+        
 
         {/* User Only */}
         {user?.role === "user" && (

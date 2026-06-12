@@ -2,6 +2,8 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 import jwt
 import datetime
+from app.shared_data import audit_logs
+# from datetime import datetime
 
 router = APIRouter()
 
@@ -72,15 +74,18 @@ def signup(data: SignupData):
         "email": data.email,
         "password": data.password,
         "role": data.role,
-        "company_id": data.company_id
+        "company_id": data.company_id,
+        "status": "Active"      # Added
     })
+
+    print("AUDIT LOGS:", audit_logs)
 
     return {
         "success": True,
         "message": "Account created successfully"
     }
 
-    
+
 @router.post("/login")
 def login(data: LoginData):
 
@@ -91,10 +96,17 @@ def login(data: LoginData):
 
         if (
             user["email"].lower() == data.email.lower()
-            and
-            user["password"] == data.password
+            and user["password"] == data.password
         ):
 
+            # Check if account is deactivated
+            if user.get("status") == "Deactivated":
+                return {
+                    "status": "deactivated",
+                    "email": user["email"]
+                }
+
+            # Generate token for active users
             token = jwt.encode(
                 {
                     "email": user["email"],
@@ -136,21 +148,6 @@ def forgot_password(data: ForgotPasswordData):
             return {
                 "message": "Password updated successfully"
             }
-
-    raise HTTPException(
-        status_code=404,
-        detail="User not found"
-    )
-
-
-@router.get("/user/{email}")
-def get_user(email: str):
-
-    for user in users:
-
-        if user["email"] == email:
-
-            return user
 
     raise HTTPException(
         status_code=404,

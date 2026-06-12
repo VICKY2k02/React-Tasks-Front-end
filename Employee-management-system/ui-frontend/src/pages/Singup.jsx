@@ -1,7 +1,12 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {signupUser}from "../services/AuthServices";
 import "./forgotpassword.css"
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useCallback } from "react";
+
+
 const Signup = () => {
 
   const [formData,setFormData] =
@@ -12,9 +17,45 @@ const Signup = () => {
     role:"user",
     company_id: 1
   });
-
+  const { token } = useParams();
   const [errors, setErrors] = useState({});
+  
+  const [inviteData, setInviteData] = useState(null);
 
+  useEffect(() => {
+
+  if(token){
+
+    loadInvitation();
+
+  }
+
+}, [token]);
+
+ 
+
+const loadInvitation = useCallback(async () => {
+
+  const response = await axios.get(
+    `http://127.0.0.1:8000/invite/${token}`
+  );
+
+  setFormData(prev => ({
+    ...prev,
+    email: response.data.email,
+    role: response.data.role,
+    company_id: response.data.company_id
+  }));
+
+}, [token]);
+
+useEffect(() => {
+
+  if (token) {
+    loadInvitation();
+  }
+
+}, [token, loadInvitation]);
  
   const handleChange = (e) => {
   const { name, value } = e.target;
@@ -87,8 +128,9 @@ return (
       <input
         type="email"
         name="email"
-        placeholder="Email"
+        value={formData.email}
         onChange={handleChange}
+        disabled={!!token}
         required
       />
 
@@ -115,7 +157,9 @@ return (
 
       <select
         name="role"
+        value={formData.role}
         onChange={handleChange}
+        disabled={!!token}
         required
       >
         <option value="user">User</option>
@@ -124,7 +168,9 @@ return (
 
       <select
         name="company_id"
+        value={formData.role}
         onChange={handleChange}
+        disabled={!!token}
       >
         <option value="1">
           Company A

@@ -13,8 +13,10 @@ import Settings from "../pages/Settings";
 import ForgotPassword from "../pages/ForgotPassword";
 import ProtectedRoute from "../components/ProtectedRoute";
 import DashboardLayout from "../components/DashboardLayout";
-
+import Members from "../pages/Members/Members";
+import AccountDeactivated from "../pages/Members/AccountDeactivated";
 import AuditLogs from "../pages/AuditLogs/AuditLogs";
+
 const AppRoutes = () => {
   const auth = useContext(AuthContext);
 
@@ -37,9 +39,19 @@ const AppRoutes = () => {
     />
 
     <Route
-    path="/signup"
-    element={<Signup />}
-  />
+      path="/signup"
+      element={<Signup />}
+    />
+
+    <Route
+      path="/invite/:token"
+      element={<Signup />}
+    />
+
+    <Route
+      path="/account-deactivated"
+      element={<AccountDeactivated />}
+    />
 
     {/* Protected Layout */}
 
@@ -96,6 +108,33 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+
+
+      <Route
+        path="/members"
+        element={
+          <ProtectedRoute
+          user={user}
+          role="admin"
+          >
+          <Members/>
+          </ProtectedRoute>
+        }
+        />
+
+        {/* <Route
+        path="/invitations"
+        element={
+          <ProtectedRoute
+          user={user}
+          role="admin"
+          >
+          <Invitations/>
+          </ProtectedRoute>
+        }
+        /> */}
+
+
 
 
 

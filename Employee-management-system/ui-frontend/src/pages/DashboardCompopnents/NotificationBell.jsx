@@ -1,95 +1,18 @@
-// import { useState } from "react";
-// import { FaBell } from "react-icons/fa";
-// import  "./Notifications.css"
-
-// const NotificationBell = ({
-//   pendingRequests,
-//   recentActivities
-// }) => {
-
-//   const [open, setOpen] =
-//     useState(false);
-
-//   return (
-//     <div className="notification-wrapper">
-
-//       <button
-//         className="notification-btn"
-//         onClick={() => setOpen(!open)}
-//       >
-//         <FaBell />
-
-//         {pendingRequests > 0 && (
-//           <span className="notification-badge">
-//             {pendingRequests}
-//           </span>
-//         )}
-//       </button>
-
-//       {open && (
-//         <div className="notification-dropdown">
-
-//           <h4>
-//             Notifications
-//           </h4>
-
-//           <p>
-//             Pending Approvals:
-//             {pendingRequests}
-//           </p>
-
-//           <hr />
-
-//           <h5>
-//             Recent Activities
-//           </h5>
-
-//           {recentActivities.length === 0 ? (
-//             <p>No activities</p>
-//           ) : (
-//             recentActivities.map(
-//               (activity, index) => (
-//                 <div
-//                   key={index}
-//                   className="notification-item"
-//                 >
-//                   <strong>
-//                     {activity.action}
-//                   </strong>
-
-//                   <p>
-//                     {activity.related_user}
-//                   </p>
-//                 </div>
-//               )
-//             )
-//           )}
-
-//         </div>
-//       )}
-
-//     </div>
-//   );
-// };
-
-// export default NotificationBell;
-
 import { useState, useEffect } from "react";
 import { FaBell } from "react-icons/fa";
 import "./Notifications.css";
+import { markAllRead } from "../../services/MemberServices";
 
 const NotificationBell = ({
   pendingRequests,
-  recentActivities
+  recentActivities,
+  reactivationRequests
 }) => {
 
   const [open, setOpen] = useState(false);
 
-  const [count, setCount] =
-    useState(pendingRequests);
+  const [count, setCount] = useState(pendingRequests);
 
-  const [activities, setActivities] =
-    useState(recentActivities);
 
   useEffect(() => {
 
@@ -97,17 +20,13 @@ const NotificationBell = ({
 
   }, [pendingRequests]);
 
-  useEffect(() => {
 
-    setActivities(recentActivities);
+  const handleMarkAllRead = async () => {
 
-  }, [recentActivities]);
-
-  const handleMarkAllRead = () => {
+    await markAllRead();
 
     setCount(0);
 
-    setActivities([]);
 
   };
 
@@ -144,23 +63,58 @@ const NotificationBell = ({
             </button>
 
           </div>
-
           <p>
-            Pending Approvals: {count}
+            Pending Approvals: {pendingRequests}
           </p>
 
           <hr />
 
+          <h5>Reactivation Requests</h5>
+
+          {
+            reactivationRequests?.length > 0 ? (
+
+              reactivationRequests.map((req) => (
+
+                <div
+                  key={req.email}
+                  className="notification-item"
+                >
+                  <strong>
+                    {req.email}
+                  </strong>
+
+                  <p>
+                    Message:  {req.reason}
+                  </p>
+
+                  <p>
+                    Status: {req.status}
+                  </p>
+
+                </div>
+
+              ))
+
+            ) : (
+
+              <p>No Requests</p>
+
+            )
+          }
+
+          {/* <hr />
+
           <h5>Recent Activities</h5>
 
-          {activities.length === 0 ? (
+          {
+            activities.length === 0 ? (
 
-            <p>No activities</p>
+              <p>No Activities</p>
 
-          ) : (
+            ) : (
 
-            activities.map(
-              (activity, index) => (
+              activities.map((activity, index) => (
 
                 <div
                   key={index}
@@ -173,12 +127,16 @@ const NotificationBell = ({
                   <p>
                     {activity.related_user}
                   </p>
+
                 </div>
 
-              )
-            )
+              ))
 
-          )}
+            )
+          } */}
+
+
+
 
         </div>
 
@@ -190,3 +148,4 @@ const NotificationBell = ({
 };
 
 export default NotificationBell;
+

@@ -7,9 +7,9 @@ import {
   rejectRoleRequest,
   clearAuditLogs
 } from "../services/EmployeeService";
-
+import ReactivationRequests from "./Members/ReactivationRequest";
 import { AuthContext } from "../context/AuthContext";
-
+import "./Members/Members.css"
 const Settings = () => {
 
   const { user } = useContext(AuthContext);
@@ -109,6 +109,7 @@ const handleSubmit = async (e) => {
       await approveRoleRequest(
         userEmail
       );
+
 
     alert(response.message);
 
@@ -256,6 +257,18 @@ const handleReject = async (
             )
 
           )}
+              <hr/>
+          {/* Reactivation Requests */}
+
+          <div className="reactivation-section">
+
+            <h2 className="section-title">
+              Reactivation Requests
+            </h2>
+
+            <ReactivationRequests />
+
+          </div>
 
         </div>
 
@@ -303,6 +316,8 @@ const handleReject = async (
       )}
 
     </div>
+
+    
             {user?.role === "admin" && (
 
           <div className="audit-settings">

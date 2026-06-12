@@ -331,3 +331,8 @@ body.dark .company-name {
    background: #0f172a;
   color: white;
 }
+
+.icons{
+font-size: 17px;
+    margin-bottom: 20px;
+}

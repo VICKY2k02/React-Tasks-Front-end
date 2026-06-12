@@ -17,16 +17,11 @@ const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const [formData, setFormData] = useState({
-      email: "",
-      password: ""
-    });
+  const [formData, setFormData] = useState({email: "", password: ""});
 
-  const [error,
-    setError] = useState("");
+  const [error, setError] = useState("");
 
-  const [loading,
-    setLoading] = useState(false);
+  const [loading,setLoading] = useState(false);
 
   const handleChange = (e) => {
 
@@ -44,44 +39,125 @@ const handleLogin = async (e) => {
   setLoading(true);
   setError("");
 
+
   try {
 
-    const response = await loginUser(formData);
+  const response = await loginUser(formData);
 
-    console.log("LOGIN RESPONSE:", response);
+if (response.status === "deactivated") {
 
-    localStorage.setItem(
-      "email",
-      response.email
-    );
+  localStorage.setItem(
+    "deactivatedUser",
+    response.email
+  );
 
-    localStorage.setItem(
-      "token",
-      response.token
-    );
+  navigate("/account-deactivated");
 
-    localStorage.setItem(
-      "company_id",
-      response.company_id
-    );
+  return;
+}
 
-    login(response);
+  localStorage.setItem(
+    "email",
+    response.email
+  );
 
-    setFormData({
-      email: "",
-      password: ""
-    });
+  localStorage.setItem(
+    "token",
+    response.token
+  );
 
-    navigate("/dashboard");
+  localStorage.setItem(
+    "company_id",
+    response.company_id
+  );
 
-  } catch (err) {
+  login(response);
 
-    setError(
-      err.response?.data?.detail ||
-      "Invalid Email or Password"
-    );
+  setFormData({
+    email: "",
+    password: ""
+  });
 
-  } finally {
+  navigate("/dashboard");
+
+} catch (err) {
+
+  setError(
+    err.response?.data?.detail ||
+    "Invalid Email or Password"
+  );
+
+}
+
+//   try {
+
+//     const response = await loginUser(formData);
+
+//     if (
+//       response.status ===
+//       "deactivated"
+//     ) {
+
+//       localStorage.setItem(
+//         "deactivatedUser",
+//         response.email
+//       );
+
+//       navigate(
+//         "/account-deactivated"
+//       );
+
+//       return;
+//     }
+
+//     console.log("LOGIN RESPONSE:", response);
+
+//     localStorage.setItem(
+//       "email",
+//       response.email
+//     );
+
+//     localStorage.setItem(
+//       "token",
+//       response.token
+//     );
+
+//     localStorage.setItem(
+//       "company_id",
+//       response.company_id
+//     );
+
+//     login(response);
+
+//     setFormData({
+//       email: "",
+//       password: ""
+//     });
+
+// //    if(
+// //  response.status ===
+// //  "Deactivated"
+// // ){
+// //  navigate(
+// //   "/account-deactivated"
+// //  );
+// // }
+// // else{
+// //  navigate(
+// //   "/dashboard"
+// //  );
+// // }
+
+//   } 
+// }catch (err) {
+
+//     setError(
+//       err.response?.data?.detail ||
+//       "Invalid Email or Password"
+//     );
+
+//   } 
+finally {
 
     setLoading(false);
 

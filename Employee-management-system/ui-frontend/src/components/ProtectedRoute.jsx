@@ -22,6 +22,19 @@ const ProtectedRoute = ({
     );
   }
 
+  if (
+    user?.status ===
+    "Deactivated"
+  ) {
+
+    return (
+      <Navigate
+        to="/account-deactivated"
+        replace
+      />
+    );
+  }
+
   return children;
 };
 
