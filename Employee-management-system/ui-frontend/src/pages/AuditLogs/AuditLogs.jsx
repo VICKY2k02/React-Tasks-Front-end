@@ -15,6 +15,7 @@ function AuditLogs() {
   }, []);
 
   const loadLogs = async () => {
+    
 
     const data =
       await getAuditLogs();

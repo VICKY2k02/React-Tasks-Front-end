@@ -991,6 +991,10 @@ body.dark .btn {
   padding: 25px;
 } */
 
+.leave-section h2{
+  margin-top: 15px;
+}
+
 .settings-title {
   font-size: 28px;
   font-weight: 700;
@@ -1188,4 +1192,289 @@ body.dark .audit-settings{
 
 .clear-audit-btn:hover {
   opacity: 0.9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== PAGE LAYOUT ===== */
+.attendance-page {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.attendance-page h1 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 25px;
+}
+
+.attendance-page h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.attendance-page h4 {
+  margin-top: 25px;
+  color: #444;
+}
+
+/* ===== ADMIN SECTION ===== */
+.admin-section {
+  background: #f8f9ff;
+  border: 1px solid #dce4ff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.download-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s ease;
+}
+
+.download-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* ===== USER SECTION ===== */
+.user-section {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.user-section button {
+  padding: 12px 20px;
+  margin-right: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+/* Punch In */
+.in-btn {
+  background: #16a34a;
+  color: white;
+}
+
+.in-btn:hover {
+  background: #15803d;
+  transform: translateY(-2px);
+}
+
+/* Punch Out */
+.out-btn {
+  background: #dc2626;
+  color: white;
+}
+
+.out-btn:hover {
+  background: #b91c1c;
+  transform: translateY(-2px);
+}
+
+/* ===== ATTENDANCE HISTORY ===== */
+.user-section ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.user-section li {
+  background: white;
+  border-left: 5px solid #2563eb;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+/* ===== PENDING ACCESS SCREEN ===== */
+.pending-msg {
+  color: #d97706;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.attendance-page p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ===== LOADING ===== */
+.loading {
+  text-align: center;
+  margin-top: 50px;
+  color: #555;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .attendance-page {
+    margin: 15px;
+    padding: 20px;
+  }
+
+  .user-section button,
+  .download-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .user-section button {
+    margin-right: 0;
+  }
+}
+
+
+/* .attendance-container{ */
+  /* padding:20px; */
+  /* background:#edf5ff; */
+  /* min-height:100vh; */
+/* } */
+
+.summary-row{
+  display:flex;
+  gap:20px;
+  margin-bottom:30px;
+}
+
+.summary-card{
+  background:white;
+  border-radius:16px;
+  padding:25px;
+  flex:1;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.actions{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:15px;
+}
+
+.actions button{
+  border:none;
+  padding:14px;
+  border-radius:12px;
+  background:#2f67f6;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.attendance-history-card{
+  background:white;
+  border-radius:16px;
+  padding:20px;
+}
+
+.attendance-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.attendance-table th,
+.attendance-table td{
+  padding:14px;
+  text-align:left;
+  border-bottom:1px solid #ddd;
+}
+
+
+
+/* ===== DARK MODE ===== */
+
+body.dark .attendance-page {
+  background: #1e293b;;
+  color: #f5f5f5;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+}
+
+body.dark .attendance-page h1,
+body.dark .attendance-page h3,
+body.dark .attendance-page h4 {
+  color: #ffffff;
+}
+
+body.dark .admin-section,
+body.dark .user-section,
+body.dark .summary-card,
+body.dark .attendance-history-card {
+  background:#1e293b;;
+  border-color:#1e293b;;
+  color: #f5f5f5;
+}
+
+body.dark .attendance-page p,
+body.dark .user-section li,
+body.dark .attendance-table td {
+  color: #d1d5db;
+}
+
+body.dark .user-section li {
+  background:#1e293b;;
+  border-left-color: #3b82f6;
+}
+
+body.dark .attendance-table th {
+  background: #1e293b;
+  color: #fff;
+}
+
+body.dark .attendance-table td,
+body.dark .attendance-table th {
+  border-bottom: 1px solid #444;
+}
+
+body.dark .attendance-table {
+  color: #f5f5f5;
+}
+
+body.dark .download-btn {
+  background: #3b82f6;
+}
+
+body.dark .download-btn:hover {
+  background: #2563eb;
+}
+
+body.dark .in-btn {
+  background: #22c55e;
+}
+
+body.dark .out-btn {
+  background: #ef4444;
+}
+
+body.dark .summary-card,
+body.dark .attendance-history-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }

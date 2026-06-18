@@ -1,48 +1,26 @@
-from sqlalchemy import Column
-from sqlalchemy import Integer
-from sqlalchemy import String
-from sqlalchemy import Boolean
-
+from sqlalchemy import Column, Integer, String
 from app.database.connection import Base
-
 
 class User(Base):
 
     __tablename__ = "users"
 
-    id = Column(
-        Integer,
-        primary_key=True,
-        index=True
-    )
+    id = Column(Integer, primary_key=True, index=True)
 
-    email = Column(
-        String,
-        unique=True,
-        nullable=False
-    )
+    email = Column(String, unique=True)
 
-    password = Column(
-        String,
-        nullable=False
-    )
+    password = Column(String)
 
-    role = Column(
-        String,
-        default="user"
-    )
+    role = Column(String)
 
-    company_id = Column(
-        Integer,
-        nullable=False
-    )
+    company_id = Column(Integer)
 
-    is_active = Column(
-        Boolean,
-        default=True
-    )
+    status = Column(String, default="Active")
 
-    deactivated_by = Column(
-        String,
-        nullable=True
-    )
+    reactivation_status = Column(String, default="")
+
+    reason = Column(String, default="")
+
+    deactivated_by = Column(String, nullable=True)
+
+    attendance_access = Column(Boolean,default=False)

@@ -153,4 +153,3 @@ def forgot_password(data: ForgotPasswordData):
         status_code=404,
         detail="User not found"
     )
-

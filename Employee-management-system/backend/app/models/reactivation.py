@@ -7,37 +7,17 @@ from datetime import datetime
 
 from app.database.connection import Base
 
-
 class ReactivationRequest(Base):
 
     __tablename__ = "reactivation_requests"
 
     id = Column(
         Integer,
-        primary_key=True,
-        index=True
+        primary_key=True
     )
 
-    user_id = Column(
-        Integer,
-        nullable=False
-    )
+    email = Column(String)
 
-    company_id = Column(
-        Integer,
-        nullable=False
-    )
+    reason = Column(String)
 
-    reason = Column(
-        String
-    )
-
-    status = Column(
-        String,
-        default="Pending"
-    )
-
-    created_at = Column(
-        DateTime,
-        default=datetime.utcnow
-    )
+    status = Column(String)

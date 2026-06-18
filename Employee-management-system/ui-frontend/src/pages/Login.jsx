@@ -89,74 +89,7 @@ if (response.status === "deactivated") {
 
 }
 
-//   try {
 
-//     const response = await loginUser(formData);
-
-//     if (
-//       response.status ===
-//       "deactivated"
-//     ) {
-
-//       localStorage.setItem(
-//         "deactivatedUser",
-//         response.email
-//       );
-
-//       navigate(
-//         "/account-deactivated"
-//       );
-
-//       return;
-//     }
-
-//     console.log("LOGIN RESPONSE:", response);
-
-//     localStorage.setItem(
-//       "email",
-//       response.email
-//     );
-
-//     localStorage.setItem(
-//       "token",
-//       response.token
-//     );
-
-//     localStorage.setItem(
-//       "company_id",
-//       response.company_id
-//     );
-
-//     login(response);
-
-//     setFormData({
-//       email: "",
-//       password: ""
-//     });
-
-// //    if(
-// //  response.status ===
-// //  "Deactivated"
-// // ){
-// //  navigate(
-// //   "/account-deactivated"
-// //  );
-// // }
-// // else{
-// //  navigate(
-// //   "/dashboard"
-// //  );
-// // }
-
-//   } 
-// }catch (err) {
-
-//     setError(
-//       err.response?.data?.detail ||
-//       "Invalid Email or Password"
-//     );
-
-//   } 
 finally {
 
     setLoading(false);

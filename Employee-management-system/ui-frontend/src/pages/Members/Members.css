@@ -403,11 +403,19 @@ body.dark .deactivate-btn:hover {
   flex: 1;
 }
 
-.request-info p,
-.user-details p {
+.user-details strong 
+{
   margin: 6px 0;
-  color: #334155;
+  color: #f4f7fa;
   font-size: 15px;
+}
+
+.user-details p
+{
+  margin: 6px 0;
+  color: #9e9c9c;
+  font-size: 15px;
+  padding-left: 5px;
 }
 
 /* RIGHT BUTTONS */
@@ -519,7 +527,12 @@ body.dark .deactivate-btn:hover {
   border-left: 5px solid #f97316;
 }
 
-body.dark .requests-container{
+body.dark .requests-container,
+reactivation-card {
+background: #1e293b;
+    color: white;
+}
+body.dark .reactivation-card {
 background: #1e293b;
     color: white;
 }

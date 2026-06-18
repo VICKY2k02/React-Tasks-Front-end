@@ -1,0 +1,292 @@
+.admin-leave-container{
+
+    padding-top:25px;
+
+}
+
+.admin-leave-container h1{
+
+    margin-bottom:20px;
+
+}
+.leave-action{
+text-align: center;
+  color: #222;
+  margin-top: 25px;
+}
+.leave-card{
+
+    /* background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    margin-bottom:18px; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 22px;
+    margin-bottom: 14px;
+    background: #fafafa;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+
+}
+
+.leave-card p{
+
+    margin:6px 0;
+
+}
+
+.action-buttons{
+
+    margin-top:15px;
+    display:flex;
+    gap:10px;
+
+}
+
+.approve-btn{
+
+    background:#16a34a;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+
+}
+
+.reject-btn{
+
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    cursor:pointer;
+
+}
+
+.approve-btn:hover{
+
+    background:#15803d;
+
+}
+
+.reject-btn:hover{
+
+    background:#b91c1c;
+
+}
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark .admin-leave-container{
+    color:#f8fafc;
+}
+
+body.dark .admin-leave-container h1{
+    color:#f8fafc;
+}
+
+body.dark .leave-card{
+    background:#1e293b;
+    border:1px solid #334155;
+    box-shadow:none;
+    color:#f8fafc;
+}
+
+body.dark .leave-card p{
+    color:#e2e8f0;
+}
+
+body.dark .action-buttons button{
+    color:white;
+}
+
+body.dark .approve-btn{
+    background:#16a34a;
+}
+
+body.dark .approve-btn:hover{
+    background:#15803d;
+}
+
+body.dark .reject-btn{
+    background:#dc2626;
+}
+
+body.dark .reject-btn:hover{
+    background:#b91c1c;
+}
+
+
+
+
+
+
+
+
+
+
+
+.leave-container{
+    width:100%;
+    padding:25px;
+}
+
+.leave-container h1{
+    font-size:28px;
+    margin-bottom:20px;
+    color:#222;
+}
+
+.leave-form{
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    margin-bottom:25px;
+}
+
+.leave-form select,
+.leave-form input,
+.leave-form textarea{
+
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    margin-bottom:18px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.leave-form textarea{
+
+    min-height:120px;
+    resize:none;
+
+}
+
+.submit-btn{
+
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.submit-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+.leave-history{
+
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.leave-item{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    border-bottom:1px solid #eee;
+
+}
+
+.leave-status{
+
+    padding:6px 14px;
+    border-radius:20px;
+    color:white;
+    font-size:13px;
+}
+
+.pending{
+
+    background:#f59e0b;
+
+}
+
+.approved{
+
+    background:#10b981;
+
+}
+
+.rejected{
+
+    background:#ef4444;
+
+}
+
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark .leave-container{
+    color:#f1f5f9;
+}
+
+body.dark .leave-container h1,
+body.dark .leave-history h2{
+    color:#f8fafc;
+}
+
+body.dark .leave-form,
+body.dark .leave-history{
+    background:#1e293b;
+    border:1px solid #334155;
+    box-shadow:none;
+}
+
+body.dark .leave-form select,
+body.dark .leave-form input,
+body.dark .leave-form textarea{
+    background:#0f172a;
+    color:#f8fafc;
+    border:1px solid #475569;
+}
+
+body.dark .leave-form select:focus,
+body.dark .leave-form input:focus,
+body.dark .leave-form textarea:focus{
+    outline:none;
+    border-color:#3b82f6;
+}
+
+body.dark .leave-form input::placeholder,
+body.dark .leave-form textarea::placeholder{
+    color:#94a3b8;
+}
+
+body.dark .leave-item{
+    border-bottom:1px solid #334155;
+    color:#f8fafc;
+}
+
+body.dark .submit-btn{
+    background:#2563eb;
+}
+
+body.dark .submit-btn:hover{
+    background:#1d4ed8;
+}

@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, useCallback } from "react";
-
+import AdminLeaveRequests from "./AdminLeaveRequests";
 import {
   requestRoleChange,
   getRoleRequests,
@@ -17,7 +17,12 @@ const Settings = () => {
   const [requests, setRequests] = useState([]);
 
   const [formData, setFormData] = useState({
-    current_password: "",
+   name:"",
+  // email:"",
+  password:"",
+  confirmPassword:"",
+  role:"user",
+  company_id:1,
     admin_email: ""
   });
 
@@ -313,8 +318,19 @@ const handleReject = async (
 
         </div>
 
+        
+
       )}
 
+      <hr />
+{user?.role === "admin" && (
+    <div className="leave-section">
+          <h2>Leave Request</h2>
+
+        <AdminLeaveRequests />
+
+    </div>
+)}
     </div>
 
     

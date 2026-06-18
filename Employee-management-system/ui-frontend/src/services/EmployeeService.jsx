@@ -3,9 +3,6 @@ import axios from "axios";
 const API_URL = "http://127.0.0.1:8000/employees";
 
 
-// const getHeaders = () => ({
-//   "company-id": localStorage.getItem("company_id")
-// });
 const getHeaders = () => {
 
   const user = JSON.parse(
@@ -94,9 +91,7 @@ export const updateEmployeeStatus = async (
       headers: getHeaders()
     }
   );
-// await axios.put(
-//     `http://127.0.0.1:8000/employees/${id}/status?status=${status}`
-//   );
+
   return response.data;
 };
 

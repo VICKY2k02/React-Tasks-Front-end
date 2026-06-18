@@ -10,24 +10,24 @@ class Notification(Base):
 
     __tablename__ = "notifications"
 
-    id = Column(
-        Integer,
-        primary_key=True
-    )
+    id = Column(Integer, primary_key=True)
 
-    recipient_email = Column(
-        String
-    )
+    recipient_email = Column(String)
 
-    message = Column(
-        String
-    )
+    company_id = Column(Integer)
+
+    title = Column(String)
+
+    message = Column(String)
+
+    type = Column(String)
 
     is_read = Column(
         Boolean,
         default=False
     )
 
-    company_id = Column(
-        Integer
+    created_at = Column(
+        DateTime,
+        default=datetime.utcnow
     )

@@ -47,6 +47,11 @@ const Sidebar = () => {
           Employees
         </NavLink>
 
+         <NavLink to="/attendance">
+              <FaClipboardCheck />
+              Attendance
+         </NavLink>
+
 
 
               {/* Admin Only */}
@@ -55,11 +60,6 @@ const Sidebar = () => {
             <NavLink to="/departments">
               <FaBuilding />
               Departments
-            </NavLink>
-
-            <NavLink to="/attendance">
-              <FaClipboardCheck />
-              Attendance
             </NavLink>
 
             <NavLink to="/audit-logs">

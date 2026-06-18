@@ -69,13 +69,9 @@ const ReactivationRequests = () => {
 
             <p>
               <strong>Status:</strong>
-              <span
-                className={`status ${
-                  req.status.toLowerCase()
-                }`}
-              >
+              
                 {req.status}
-              </span>
+              
             </p>
 
           </div>

@@ -12,17 +12,11 @@ const getHeaders = () => {
   };
 };
 
-export const getMembers = async (
-  companyId
-) => {
 
+export const getMembers = async (companyId) => {
   const response = await axios.get(
-    `${API}/members/${companyId}`,
-    // {
-    //   headers: getHeaders()
-    // }
+    `http://127.0.0.1:8000/members/${companyId}`
   );
-
   return response.data;
 };
 

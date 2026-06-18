@@ -4,7 +4,12 @@ from sqlalchemy.orm import Session
 from app.database.connection import SessionLocal
 from app.models.employee_model import Employee
 from app.routes.settings_routes import role_requests
-from app.shared_data import reactivation_requests
+from app.shared_data import (
+    notifications,
+    reactivation_requests,
+    leave_requests,
+    attendance_access_requests
+)
 from app.routes.auth_routes import users
 
 router = APIRouter()
@@ -52,9 +57,28 @@ def get_dashboard_stats(
         if req["status"] == "Pending"
     ])
 
+    pending_leave_requests = len([
+        req
+        for req in leave_requests
+        if req["status"] == "Pending"
+        and req["company_id"] == company_id
+    ])
+
+    pending_attendance_requests = len([
+        req
+        for req in attendance_access_requests
+        if req["status"] == "Pending"
+        and req["company_id"] == company_id
+    ])
+
     pending_requests = (
         pending_role_requests +
-        pending_reactivation_requests
+        pending_reactivation_requests +
+        pending_leave_requests +
+        pending_attendance_requests
+        # pending_attendance_requests
+
+        # pending_reactivation_requests
     )
 
     return {

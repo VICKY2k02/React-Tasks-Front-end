@@ -90,7 +90,7 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute
             user={user}
-            role="admin"
+            // role="admin"
           >
             <Attendance />
           </ProtectedRoute>
@@ -121,22 +121,6 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
         />
-
-        {/* <Route
-        path="/invitations"
-        element={
-          <ProtectedRoute
-          user={user}
-          role="admin"
-          >
-          <Invitations/>
-          </ProtectedRoute>
-        }
-        /> */}
-
-
-
-
 
           <Route
             path="/settings"

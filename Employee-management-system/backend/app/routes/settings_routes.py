@@ -157,10 +157,15 @@ def approve_role_request(
 @router.get("/role-requests/{admin_email}")
 def get_role_requests(admin_email: str):
 
+    print("Requested Admin:", admin_email)
+
+    for req in role_requests:
+        print(req)
+
     return [
         req
         for req in role_requests
-        if req["admin_email"] == admin_email
+        if req["admin_email"].strip().lower() == admin_email.strip().lower()
     ]
 
  #Reject-role-request

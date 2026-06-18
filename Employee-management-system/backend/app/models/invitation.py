@@ -6,47 +6,24 @@ from datetime import datetime
 
 from app.database.connection import Base
 
-
 class Invitation(Base):
 
     __tablename__ = "invitations"
 
     id = Column(
         Integer,
-        primary_key=True,
-        index=True
+        primary_key=True
     )
 
-    email = Column(
-        String,
-        nullable=False
-    )
+    email = Column(String)
 
-    role = Column(
-        String,
-        nullable=False
-    )
+    role = Column(String)
 
-    token = Column(
-        String,
-        unique=True
-    )
+    company_id = Column(Integer)
 
-    status = Column(
-        String,
-        default="Pending"
-    )
+    token = Column(String)
 
-    company_id = Column(
-        Integer,
-        nullable=False
-    )
+    status = Column(String)
 
-    created_by = Column(
-        String
-    )
-
-    created_at = Column(
-        DateTime,
-        default=datetime.utcnow
-    )
+    db.add(invitation)
+    db.commit()

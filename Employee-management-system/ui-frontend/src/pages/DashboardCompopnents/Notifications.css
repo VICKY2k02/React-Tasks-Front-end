@@ -202,3 +202,36 @@ body.dark .notification-item p {
   border-radius:6px;
   cursor:pointer;
 }
+
+
+.notification-item div {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.notification-item div button {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Approve Button */
+.notification-item div button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Reject Button */
+.notification-item div button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.notification-item div button:hover {
+  opacity: 0.9;
+}
