@@ -4,7 +4,8 @@ import {
   addEmployee,
   deleteEmployee,
   updateEmployeeStatus,
-  updateEmployee
+  updateEmployee,
+  transferDepartment
 } from "../../services/EmployeeService";
 
 
@@ -29,6 +30,10 @@ const EmployeeDashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState(null);
+  const [transferEmployee, setTransferEmployee] = useState(null);
+  const [showTransferModal, setShowTransferModal] = useState(false);
+ const [showTransferToast, setShowTransferToast] = useState(false);
+  const [newDepartment, setNewDepartment] = useState("");
 
   const employeesPerPage = 5;
 
@@ -234,6 +239,36 @@ const filteredEmployees = Array.isArray(employees)
     })
   : [];
 
+
+// Handler:
+  const handleTransfer = (employee) => {
+  setTransferEmployee(employee);
+  setNewDepartment(employee.department);
+  setShowTransferModal(true);
+};
+
+
+const saveTransfer = async () => {
+  try {
+    await transferDepartment(
+      transferEmployee.id,
+      newDepartment
+    );
+
+    fetchEmployees();
+
+    setShowTransferModal(false);
+    setShowTransferToast(true);
+
+    setTimeout(() => {
+      setShowTransferToast(false);
+    }, 3000);
+
+  } catch (error) {
+    console.log(error);
+    alert("Transfer failed");
+  }
+};
   
   // Pagination
   const indexOfLastEmployee = currentPage * employeesPerPage;
@@ -307,6 +342,7 @@ const filteredEmployees = Array.isArray(employees)
         handleDeleteEmployee={handleDeleteEmployee}
         handleEdit={handleEdit}
         handleStatusChange={handleStatusChange}
+        handleTransfer={handleTransfer}
       />
 
       <EmployeeProfilePreview employee={selectedEmployee} />
@@ -333,6 +369,51 @@ const filteredEmployees = Array.isArray(employees)
     }
       editingEmployee={editingEmployee}
     />
+
+
+     <div className="dashboard-container">
+
+      {showTransferToast && (
+        <div className="transfer-toast">
+          ✅ Employee Transferred
+        </div>
+      )}
+
+    {
+    showTransferModal && (
+    <div className="modal-overlay">
+      <div className="modal-box">
+        <h3>Transfer Department</h3>
+
+        <p>{transferEmployee?.name}</p>
+
+        <select
+          value={newDepartment}
+          onChange={(e) =>
+            setNewDepartment(e.target.value)
+          }
+        >
+          <option>HR</option>
+          <option>Engineering</option>
+          <option>Finance</option>
+        </select>
+
+        <button onClick={saveTransfer}>
+          Save
+        </button>
+
+        <button
+          onClick={() =>
+            setShowTransferModal(false)
+          }
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+    )
+    }
+  </div>
   </div>
 );
 };

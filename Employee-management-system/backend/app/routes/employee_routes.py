@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.database.connection import SessionLocal
 from app.models.employee_model import Employee
 from app.schemas.employee_schema import EmployeeCreate
+from app.shared_data import notifications
 from app.util.audit_logger import create_audit_log
 
 router = APIRouter()
@@ -209,4 +210,43 @@ def update_status(
         "success": True,
         "message": "Status updated successfully",
         "data": employee
+    }
+
+
+@router.put("/employees/{employee_id}/transfer")
+def transfer_department(
+    employee_id: int,
+    department: str,
+    company_id: int = Depends(get_company_id),
+    db: Session = Depends(get_db)
+):
+    employee = db.query(Employee).filter(
+        Employee.id == employee_id,
+        Employee.company_id == company_id
+    ).first()
+
+    if not employee:
+        raise HTTPException(
+            status_code=404,
+            detail="Employee not found"
+        )
+
+    old_department = employee.department
+    employee.department = department
+
+    db.commit()
+    db.refresh(employee)
+
+
+    create_audit_log(
+        db=db,
+        user_name="Admin",
+        action="Department Transfer",
+        related_user=employee.name,
+        company_id=company_id
+    )
+
+    return {
+        "success": True,
+        "message": "Department transferred"
     }

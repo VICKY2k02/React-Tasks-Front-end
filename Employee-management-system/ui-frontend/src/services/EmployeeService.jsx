@@ -236,3 +236,21 @@ export const getRoleStats = async () => {
   return response.data;
 };
 
+
+
+
+
+export const transferDepartment = async (
+  id,
+  department
+) => {
+  const response = await axios.put(
+    `http://127.0.0.1:8000/employees/${id}/transfer?department=${department}`,
+    {},
+    {
+      headers: getHeaders()
+    }
+  );
+
+  return response.data;
+};

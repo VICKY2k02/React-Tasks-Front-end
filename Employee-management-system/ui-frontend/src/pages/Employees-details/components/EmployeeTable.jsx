@@ -7,7 +7,9 @@ const EmployeeTable = ({ employees,
                           handleDeleteEmployee, 
                           // handleStatusToggle,
                           handleStatusChange,
-                          handleEdit }) => {
+                          handleEdit,
+                          handleTransfer
+                        }) => {
 
 const [openMenu, setOpenMenu] = useState(null);
 
@@ -116,7 +118,14 @@ const [openMenu, setOpenMenu] = useState(null);
                   Delete
                 </button>
 
-              </div>
+                <button className="ed-btn" onClick={() => {
+                    handleTransfer(employee);
+                    setOpenMenu(null);
+                  }}>
+                    Transfer
+                  </button>
+                </div>
+
             )}
 
           </td>
