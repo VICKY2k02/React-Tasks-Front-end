@@ -16,6 +16,7 @@ import DashboardLayout from "../components/DashboardLayout";
 import Members from "../pages/Members/Members";
 import AccountDeactivated from "../pages/Members/AccountDeactivated";
 import AuditLogs from "../pages/AuditLogs/AuditLogs";
+import ActivityTable from "../pages/ActivityTable";
 
 const AppRoutes = () => {
   const auth = useContext(AuthContext);
@@ -121,6 +122,17 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
         />
+
+        <Route 
+        path="/activity" 
+        element={
+          <ProtectedRoute
+          user={user}
+          role="admin"
+          >
+        <ActivityTable />
+        </ProtectedRoute>
+        } />
 
           <Route
             path="/settings"

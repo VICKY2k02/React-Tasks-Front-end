@@ -1,139 +1,96 @@
-/* Audit Logs Page */
-
+/* Container */
 .auditlogs-container {
-  padding: 25px;
-  background: #f5f7fb;
-  min-height: 100vh;
+  padding: 24px;
 }
 
 .auditlogs-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: #222;
   margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #1f2937;
 }
 
-/* Table Card */
-
+/* Card */
 .auditlogs-card {
-  background-color: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  overflow-x: auto;
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
 /* Table */
-
 .auditlogs-table {
   width: 100%;
   border-collapse: collapse;
 }
 
+/* HEADER (TH STYLE - MAIN PART) */
 .auditlogs-table thead {
-  background: #4f46e5;
-  color: white;
+  background: #2563eb;
 }
 
-.auditlogs-table th {
-  padding: 14px;
+.auditlogs-table thead th {
+  color: #ffffff;
+
+  /* FONT STYLE */
+  font-size: 13px;
+  font-weight: 700;
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+
+  /* SPACING */
+  padding: 16px;
   text-align: left;
-  font-size: 15px;
-  font-weight: 600;
 }
 
-.auditlogs-table td {
-  padding: 14px;
-  border-bottom: 1px solid #eee;
+/* BODY */
+.auditlogs-table tbody td {
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
   font-size: 14px;
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-/* Action Badges */
+.auditlogs-table tbody tr:hover {
+  background: #f8fafc;
+}
 
+/* Action Badge */
 .action-badge {
   display: inline-block;
   padding: 6px 12px;
-  border-radius: 30px;
+  border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
+  text-transform: capitalize;
 }
 
-/* Employee Actions */
-
-.created {
-  background: #dcfce7;
-  color: #15803d;
+/* DARK MODE */
+body.dark .auditlogs-title {
+  color: #f9fafb;
 }
 
-.updated {
-  background: #dbeafe;
-  color: #1d4ed8;
+body.dark .auditlogs-card {
+  background: #1f2937;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
 
-.deleted {
-  background: #fee2e2;
-  color: #dc2626;
-}
-
-/* Role Actions */
-
-.approved {
-  background: #ccfbf1;
-  color: #0f766e;
-}
-
-.rejected {
-  background: #fef3c7;
-  color: #b45309;
-}
-
-.requested {
-  background: #ede9fe;
-  color: #6d28d9;
-}
-
-/* Empty State */
-
-.no-logs {
-  text-align: center;
-  padding: 40px;
-  color: #666;
-  font-size: 16px;
-}
-
-/* Responsive */
-
-@media (max-width: 768px) {
-
-  .auditlogs-container {
-    padding: 15px;
-  }
-
-  .auditlogs-title {
-    font-size: 22px;
-  }
-
-  .auditlogs-table th,
-  .auditlogs-table td {
-    padding: 10px;
-    font-size: 13px;
-  }
+body.dark .auditlogs-table thead {
+ background: #4f46e5;
 
 }
 
-body.dark  .auditlogs-card{
-   background-color: #1e293b;
-    color: white;
-    border-radius: 10px;
+body.dark .auditlogs-table thead th {
+  color: #ffffff;
 }
 
-body.dark .auditlogs-title{
-    color: white;
+body.dark .auditlogs-table tbody td {
+  color: #e5e7eb;
+  border-bottom: 1px solid #374151;
 }
 
-body.dark .auditlogs-container{
-     background-color: #1e293b;
-    color: white;
-    border-radius: 10px;
-
+body.dark .auditlogs-table tbody tr:hover {
+  background: #374151;
 }

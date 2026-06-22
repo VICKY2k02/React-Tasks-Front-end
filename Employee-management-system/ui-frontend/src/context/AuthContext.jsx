@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -35,12 +36,18 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-  const logout = () => {
 
-    setUser(null);
+const logout = async () => {
+  const email = localStorage.getItem("email");
 
-    localStorage.removeItem("user");
-  };
+  await axios.post(
+    "http://127.0.0.1:8000/logout",
+    { email }
+  );
+
+  setUser(null);
+  localStorage.clear();
+};
 
   return (
 

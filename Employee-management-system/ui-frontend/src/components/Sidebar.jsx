@@ -10,6 +10,7 @@ import {
   FaCog,
   FaSignOutAlt,
   FaHistory,
+  FaChartLine
 } from "react-icons/fa";
 
 const Sidebar = () => {
@@ -71,11 +72,18 @@ const Sidebar = () => {
               <FaUsers />
               Members
             </NavLink>
+            
+            <NavLink to="activity">
+              <FaChartLine style={{ marginRight: "8px" }} />
+              Activity
+            </NavLink>
 
             <NavLink to="/settings">
               <FaCog />
               Settings
             </NavLink>
+
+            
           </>
 
         )}
