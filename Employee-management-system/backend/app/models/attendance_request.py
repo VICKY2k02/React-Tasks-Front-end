@@ -20,11 +20,6 @@ class AttendanceAccessRequest(Base):
         primary_key=True
     )
 
-    id = Column(
-        Integer,
-        primary_key=True
-    )
-
     user_email = Column(String)
 
     company_id = Column(Integer)

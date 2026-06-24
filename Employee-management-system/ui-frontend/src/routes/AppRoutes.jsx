@@ -17,6 +17,7 @@ import Members from "../pages/Members/Members";
 import AccountDeactivated from "../pages/Members/AccountDeactivated";
 import AuditLogs from "../pages/AuditLogs/AuditLogs";
 import ActivityTable from "../pages/ActivityTable";
+import DataExportCenter from "../pages/DataExportCenter";
 
 const AppRoutes = () => {
   const auth = useContext(AuthContext);
@@ -133,6 +134,19 @@ const AppRoutes = () => {
         <ActivityTable />
         </ProtectedRoute>
         } />
+
+
+        <Route
+          path="/data-export"
+          element={
+              <ProtectedRoute
+                  user={user}
+                  role="admin"
+              >
+                  <DataExportCenter />
+              </ProtectedRoute>
+          }
+      />
 
           <Route
             path="/settings"

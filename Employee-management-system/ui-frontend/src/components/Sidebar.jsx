@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { FaFileExport } from "react-icons/fa";
 
 import {
   FaHome,
@@ -77,6 +78,12 @@ const Sidebar = () => {
               <FaChartLine style={{ marginRight: "8px" }} />
               Activity
             </NavLink>
+
+
+          <NavLink to="/data-export">
+              <FaFileExport />
+              Data Export Center
+          </NavLink>
 
             <NavLink to="/settings">
               <FaCog />

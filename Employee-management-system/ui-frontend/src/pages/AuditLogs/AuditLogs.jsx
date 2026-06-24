@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getAuditLogs } from "../../services/EmployeeService";
+import { getAuditLogs, clearAuditLogs } from "../../services/EmployeeService";
 
 import "./AuditLogs.css";
 
@@ -24,13 +24,47 @@ function AuditLogs() {
 
   };
 
+        const handleClearAuditLogs = async () => {
+  
+    const confirmClear = window.confirm(
+      "Are you sure you want to clear all audit logs?"
+    );
+  
+    if (!confirmClear) return;
+  
+    try {
+  
+      const response =
+        await clearAuditLogs();
+  
+      alert(response.message);
+  
+    } catch (error) {
+  
+      alert(
+        error.response?.data?.detail ||
+        "Failed to clear audit logs"
+      );
+  
+    }
+  };
+
   return (
 
  <div className="auditlogs-container">
 
-  <h1 className="auditlogs-title">
-    Audit Logs
-  </h1>
+    <div className="auditlogs-header">
+      <h1 className="auditlogs-title">
+        Audit Logs
+      </h1>
+
+      <button
+        className="clear-audit-btn"
+        onClick={handleClearAuditLogs}
+      >
+        Clear Audit Logs
+      </button>
+  </div>
 
   <div className="auditlogs-card">
 

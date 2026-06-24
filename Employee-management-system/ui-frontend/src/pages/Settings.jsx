@@ -4,8 +4,7 @@ import {
   requestRoleChange,
   getRoleRequests,
   approveRoleRequest,
-  rejectRoleRequest,
-  clearAuditLogs
+  rejectRoleRequest
 } from "../services/EmployeeService";
 import ReactivationRequests from "./Members/ReactivationRequest";
 import { AuthContext } from "../context/AuthContext";
@@ -160,30 +159,7 @@ const handleReject = async (
   }
 };
 
-      const handleClearAuditLogs = async () => {
-
-  const confirmClear = window.confirm(
-    "Are you sure you want to clear all audit logs?"
-  );
-
-  if (!confirmClear) return;
-
-  try {
-
-    const response =
-      await clearAuditLogs();
-
-    alert(response.message);
-
-  } catch (error) {
-
-    alert(
-      error.response?.data?.detail ||
-      "Failed to clear audit logs"
-    );
-
-  }
-};
+      
 
 
   return (
@@ -333,23 +309,7 @@ const handleReject = async (
 )}
     </div>
 
-    
-            {user?.role === "admin" && (
-
-          <div className="audit-settings">
-
-                    <h2>Audit Logs</h2>
-
-                    <button
-                      className="clear-audit-btn"
-                      onClick={handleClearAuditLogs}
-                    >
-                      Clear Audit Logs
-                    </button>
-
-                  </div>
-
-                )}
+  
             </div>
     
 

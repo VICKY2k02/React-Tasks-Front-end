@@ -25,6 +25,10 @@ from app.routes.attendance_access_routes import router as attendance_access_rout
 from app.routes.leave_routes import router as leave_router
 from app.routes.activity_routes import router as activity_router
 
+from app.routes.export_routes import router as export_routes
+
+
+
 # CREATE TABLES
 Base.metadata.create_all(bind=engine)
 
@@ -34,7 +38,10 @@ app = FastAPI()
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -54,6 +61,10 @@ app.include_router(notification_router)
 app.include_router(attendance_access_router)
 app.include_router(leave_router)
 app.include_router(activity_router)
+app.include_router(export_routes)
+
+
+
 
 # SUCCESS MESSAGE
 @app.on_event("startup")

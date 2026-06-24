@@ -254,3 +254,61 @@ export const transferDepartment = async (
 
   return response.data;
 };
+
+
+
+
+export const exportData = async (data, format) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const response = await axios.post(
+    "http://127.0.0.1:8000/exports",
+    {
+      data,
+      format
+    },
+    {
+      headers: {
+   "company-id": user.company_id,
+   "user-email": user.email
+},
+      responseType: "blob"
+    }
+  );
+
+  return response.data;
+};
+
+
+export const getExportHistory = async () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const response = await axios.get(
+    "http://127.0.0.1:8000/exports/history",
+    {
+      headers: {
+        "user-email": user.email
+      }
+    }
+  );
+
+  return response.data;
+};
+
+
+export const clearExportHistory = async () => {
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
+
+  const response = await axios.delete(
+    "http://127.0.0.1:8000/exports/clear",
+    {
+      headers: {
+        "user-email": user.email
+      }
+    }
+  );
+
+  return response.data;
+};
