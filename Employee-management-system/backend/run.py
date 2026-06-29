@@ -24,7 +24,7 @@ from app.routes.notification_routes import ( router as notification_router)
 from app.routes.attendance_access_routes import router as attendance_access_router
 from app.routes.leave_routes import router as leave_router
 from app.routes.activity_routes import router as activity_router
-
+from app.routes.suspension_routes import router as suspension_router
 from app.routes.export_routes import router as export_routes
 
 
@@ -38,10 +38,7 @@ app = FastAPI()
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000"
-    ],
+    allow_origins=[ "*" ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -62,7 +59,7 @@ app.include_router(attendance_access_router)
 app.include_router(leave_router)
 app.include_router(activity_router)
 app.include_router(export_routes)
-
+app.include_router(suspension_router)
 
 
 

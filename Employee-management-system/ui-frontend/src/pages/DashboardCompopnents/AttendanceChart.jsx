@@ -7,14 +7,18 @@ import {
   ResponsiveContainer
 } from "recharts";
 
+ 
 
-const AttendanceChart = ({ employees }) => {
-    
-    const data = employees.map(emp => ({
-      name: emp.name,
-      attendance: parseFloat(
-      emp.attendance?.replace("%", "") || 0)
-    }));
+const AttendanceChart = ({ employees = [] }) => {
+
+  const data = employees.map(emp => ({
+    name: emp.name,
+    attendance: parseFloat(
+      emp.attendance?.replace("%", "") || 0
+    )
+  }));
+
+ 
 
   return (
     <div className="chart-section">

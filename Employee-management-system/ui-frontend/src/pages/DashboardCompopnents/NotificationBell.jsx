@@ -6,6 +6,7 @@ import axios from "axios";
 
 const NotificationBell = ({
   pendingRequests,
+  notifications = [], 
   leaveRequests=[],
   recentActivities,
   reactivationRequests,
@@ -64,6 +65,8 @@ const rejectAttendance = async (email) => {
     console.error(err);
   }
 };
+
+
 
 
   return (
@@ -217,6 +220,65 @@ const rejectAttendance = async (email) => {
             <p>No Requests</p>
           )}
         </div>
+
+
+        <hr />
+
+<h5>Reinstatement Requests</h5>
+
+{
+notifications
+.filter(
+  n =>
+    n.type === "reinstatement" &&
+    n.status === "Pending"
+)
+    .length > 0 ? (
+
+      notifications
+        .filter(n => n.type === "reinstatement")
+        .map((req, index) => (
+          <div
+            key={index}
+            className="notification-item"
+          >
+            <strong>{req.email}</strong>
+
+            <p>{req.reason}</p>
+
+            <p>Status: {req.status}</p>
+
+            {req.status === "Pending" && (
+              <>
+                <button
+                  onClick={async () => {
+                    await onApprove(req.email);
+                    window.dispatchEvent(
+                      new Event("dashboardRefresh")
+                    );
+                  }}
+                >
+                  Approve
+                </button>
+
+                <button
+                  onClick={async () => {
+                    await onReject(req.email);
+                    window.dispatchEvent(
+                      new Event("dashboardRefresh")
+                    );
+                  }}
+                >
+                  Reject
+                </button>
+              </>
+            )}
+          </div>
+        ))
+    ) : (
+      <p>No Requests</p>
+    )
+}
                   {/* <hr />
 
           <h5>Recent Activities</h5>

@@ -45,14 +45,22 @@ const handleLogin = async (e) => {
   const response = await loginUser(formData);
 
 if (response.status === "deactivated") {
-
   localStorage.setItem(
     "deactivatedUser",
     response.email
   );
 
   navigate("/account-deactivated");
+  return;
+}
 
+if (response.status === "suspended") {
+  localStorage.setItem(
+    "suspendedUser",
+    JSON.stringify(response)
+  );
+
+  navigate("/account-suspended");
   return;
 }
 

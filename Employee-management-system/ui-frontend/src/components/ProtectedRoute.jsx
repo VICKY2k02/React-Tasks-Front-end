@@ -35,6 +35,11 @@ const ProtectedRoute = ({
     );
   }
 
+
+  if (user?.status === "Suspended") {
+    return <Navigate to="/account-suspended" />;
+  }
+
   return children;
 };
 

@@ -125,3 +125,67 @@ async () => {
 
   return response.data;
 };
+
+
+
+export const suspendUser = async (email, reason) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const response = await axios.put(
+    "http://127.0.0.1:8000/suspend",   // <-- change
+    {
+      email,
+      reason
+    },
+    {
+      headers: {
+        "admin-email": user.email
+      }
+    }
+  );
+
+  return response.data;
+};
+
+
+export const getReinstatementRequests = async () => {
+  const response = await axios.get(
+    "http://127.0.0.1:8000/reinstatement-requests"
+  );
+  return response.data;
+};
+
+
+
+export const approveReinstatement = async (email) => {
+  const response = await axios.put(
+    `http://127.0.0.1:8000/reinstate?email=${email}`
+  );
+  return response.data;
+};
+
+export const rejectReinstatement = async (email) => {
+  const response = await axios.put(
+    `http://127.0.0.1:8000/reject-reinstate?email=${email}`
+  );
+  return response.data;
+};
+
+
+export const submitReinstatementRequest = async (data) => {
+  const response = await axios.post(
+    "http://127.0.0.1:8000/reinstatement-request",
+    data
+  );
+
+  return response.data;
+};
+
+
+
+export const getAdminNotifications = async (email) => {
+  const response = await axios.get(
+    `http://127.0.0.1:8000/notifications/${email}`
+  );
+  return response.data;
+};

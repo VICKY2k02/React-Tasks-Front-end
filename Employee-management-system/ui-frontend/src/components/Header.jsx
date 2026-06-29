@@ -2,8 +2,19 @@ import { useContext, useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { AuthContext } from "../context/AuthContext";
 import NotificationBell from "../pages/DashboardCompopnents/NotificationBell";
-import { getReactivationRequests } from "../services/MemberServices";
-import { getDashboardStats, getAuditLogs } from "../services/EmployeeService";
+
+import {
+  getReactivationRequests,
+  approveReinstatement,
+  rejectReinstatement,
+  getAdminNotifications
+} from "../services/MemberServices";
+
+import {
+  getDashboardStats,
+  getAuditLogs
+} from "../services/EmployeeService";
+
 import {
   getAttendanceRequests
 } from "../services/AttendanceServices";
@@ -11,133 +22,182 @@ import {
 import { getCompanyLeaves } from "../services/LeaveServicce";
 
 function Header() {
-
   const { user } = useContext(AuthContext);
 
-    const [ reactivationRequests, setReactivationRequests ] = useState([]);
-const [leaveRequests,setLeaveRequests]=useState([]);
+  const [reactivationRequests, setReactivationRequests] = useState([]);
+  const [leaveRequests, setLeaveRequests] = useState([]);
   const [pendingRequests, setPendingRequests] = useState(0);
-
   const [activities, setActivities] = useState([]);
-const [ attendanceRequests,setAttendanceRequests] = useState([]);
+  const [attendanceRequests, setAttendanceRequests] = useState([]);
+  const [notifications, setNotifications] = useState([]);
 
-const companyId = Number(user?.company_id);
+  const companyId = Number(user?.company_id);
 
-const companyName =
-  companyId === 1
-    ? "Company A"
-    : companyId === 2
-    ? "Company B"
-    : "Company";
+  const companyName =
+    companyId === 1
+      ? "Company A"
+      : companyId === 2
+      ? "Company B"
+      : "Company";
 
-useEffect(() => {
-  if (!user) return;
+  // const handleApprove = async (email) => {
+  //   try {
+  //     await approveReinstatement(email);
+  //     loadNotifications();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  loadNotifications();
+  // const handleReject = async (email) => {
+  //   try {
+  //     await rejectReinstatement(email);
+  //     loadNotifications();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const refresh = () => {
-    loadNotifications();
+  const handleApprove = async (email) => {
+    await approveReinstatement(email);
+    await loadNotifications();
   };
 
-  window.addEventListener("dashboardRefresh", refresh);
-
-  return () => {
-    window.removeEventListener("dashboardRefresh", refresh);
+  const handleReject = async (email) => {
+    await rejectReinstatement(email);
+    await loadNotifications();
   };
-}, [user]);
 
-const loadNotifications = async () => {
-  try {
-    const requests = await getReactivationRequests();
-    setReactivationRequests(requests);
+  const loadNotifications = async () => {
+    try {
+      const adminNotifications =
+        await getAdminNotifications(user.email);
 
-    let attendanceData = [];
-    let leaveData = [];
+      setNotifications(adminNotifications);
 
-    if (user?.role === "admin") {
-      attendanceData = await getAttendanceRequests(
-        companyId,
-        user.email
-      );
-      setAttendanceRequests(attendanceData);
+      const requests =
+        await getReactivationRequests();
 
-      const leaveRes = await getCompanyLeaves(companyId);
-      console.log("leaveRes =", leaveRes);
-      console.log("companyId:", companyId);
+      setReactivationRequests(requests);
 
-      leaveData = leaveRes.data.filter(
-        leave => leave.status === "Pending"
-      );
+      let attendanceData = [];
+      let leaveData = [];
 
-      setLeaveRequests(leaveData);
+      if (user?.role === "admin") {
+        attendanceData = await getAttendanceRequests(
+          companyId,
+          user.email
+        );
 
-    } else {
-      setAttendanceRequests([]);
-      setLeaveRequests([]);
+        setAttendanceRequests(attendanceData);
+
+        const leaveRes =
+          await getCompanyLeaves(companyId);
+
+        leaveData = leaveRes.data.filter(
+          leave => leave.status === "Pending"
+        );
+
+        setLeaveRequests(leaveData);
+      } else {
+        setAttendanceRequests([]);
+        setLeaveRequests([]);
+      }
+
+      const stats = await getDashboardStats();
+      const logs = await getAuditLogs();
+
+      setActivities(logs.slice(0, 5));
+
+      const roleRequestCount =
+        stats.pendingRequests;
+
+        setPendingRequests(stats.pendingRequests);
+
+  //     const reactivationCount =
+  //       requests.filter(
+  //         r => r.status === "Pending"
+  //       ).length;
+
+  //     const attendanceCount =
+  //       attendanceData.filter(
+  //         r => r.status === "Pending"
+  //       ).length;
+
+  // //       const reinstatementCount =
+  // // adminNotifications.filter(
+  // //   n => n.type === "reinstatement" &&
+  // //        n.status === "Pending"
+  // // ).length;
+
+  //     const leaveCount = leaveData.length;
+
+  //     const notificationCount =
+  //       adminNotifications.filter(
+  //         n => n.type === "reinstatement"
+  //       ).length;
+
+  //     setPendingRequests(
+  //       roleRequestCount +
+  //       reactivationCount +
+  //       attendanceCount +
+  //       leaveCount +
+  //       notificationCount
+  //     );
+
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    const stats = await getDashboardStats();
-    const logs = await getAuditLogs();
+  useEffect(() => {
+    if (!user) return;
 
-    setActivities(logs.slice(0, 5));
+    loadNotifications();
 
-    const roleRequestCount = stats.pendingRequests;
+    const refresh = () => {
+      loadNotifications();
+    };
 
-    const reactivationCount =
-      requests.filter(r => r.status === "Pending").length;
-
-    const attendanceCount =
-      attendanceData.filter(r => r.status === "Pending").length;
-
-    const leaveCount = leaveData.length;
-
-    setPendingRequests(
-      roleRequestCount 
-      // reactivationCount 
-      // attendanceCount +
-      // leaveCount
+    window.addEventListener(
+      "dashboardRefresh",
+      refresh
     );
 
-  } catch (error) {
-    console.log(error);
-  }
-};
-
+    return () => {
+      window.removeEventListener(
+        "dashboardRefresh",
+        refresh
+      );
+    };
+  }, [user]);
 
   return (
-
     <div className="header">
-
       <div className="company-name">
         <div>{companyName}</div>
       </div>
 
       <div className="header-right">
-
         <NotificationBell
-          pendingRequests={ pendingRequests }
-          // recentActivities={ activities }
-          reactivationRequests={ reactivationRequests } 
-          attendanceRequests={attendanceRequests}
+          notifications={notifications}
+          pendingRequests={pendingRequests}
           leaveRequests={leaveRequests}
+          attendanceRequests={attendanceRequests}
+          reactivationRequests={reactivationRequests}
+          onApprove={handleApprove}
+          onReject={handleReject}
         />
 
         <div className="profile">
-
-          {
-            user?.role === "admin"
-              ? "Admin"
-              : "User"
-          }
-
+          {user?.role === "admin"
+            ? "Admin"
+            : "User"}
         </div>
-
       </div>
 
       <ThemeToggle />
-
     </div>
-
   );
 }
 

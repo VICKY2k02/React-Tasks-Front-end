@@ -49,26 +49,42 @@ users = [
         "email": "admin@gmail.com",
         "password": "admin123",
         "role": "admin",
-        "company_id": 1
+        "company_id": 1,
+        "status": "Active",
+        "suspension_reason": None,
+        "suspended_by": None,
+        "suspended_at": None
     },
     {
         "email": "user@gmail.com",
         "password": "user123",
         "role": "user",
-        "company_id": 1
+        "company_id": 1,
+        "status": "Active",
+        "suspension_reason": None,
+        "suspended_by": None,
+        "suspended_at": None
     },
 
        {
         "email": "admin2@gmail.com",
         "password": "admin123",
         "role": "admin",
-        "company_id": 2
+        "company_id": 2,
+        "status": "Active",
+        "suspension_reason": None,
+        "suspended_by": None,
+        "suspended_at": None
     },
         {
         "email": "user2@gmail.com",
         "password": "user123",
         "role": "user",
-        "company_id": 2
+        "company_id": 2,
+        "status": "Active",
+        "suspension_reason": None,
+        "suspended_by": None,
+        "suspended_at": None
     }
 ]
 
@@ -145,6 +161,14 @@ def login(data: LoginData, request: Request):
                     "email": user["email"]
                 }
 
+            if user.get("status") == "Suspended":
+                return {
+                    "status": "suspended",
+                    "email": user["email"],
+                    "reason": user.get("suspension_reason"),
+                    "suspended_by": user.get("suspended_by"),
+                    "suspended_at": user.get("suspended_at")
+                }
             # -------------------------------
             # Activity Log
             # -------------------------------
@@ -207,7 +231,8 @@ def login(data: LoginData, request: Request):
                 "token": token,
                 "role": user["role"],
                 "email": user["email"],
-                "company_id": user.get("company_id", 1),
+                "company_id": user["company_id"],
+                "status": user.get("status", "Active"),
                 "is_new_device": is_new_device,
                 "is_new_ip": is_new_ip
             }

@@ -546,3 +546,34 @@ body.dark .settings-title{
   background: #1e293b;
     color: white;
 }
+
+
+
+
+.suspend-btn {
+  background: orange;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin-left: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+
+
+.status.pending {
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+
+.status.approved {
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+
+.status.rejected {
+  color: rgb(245, 242, 242);
+  font-weight: bold;
+}

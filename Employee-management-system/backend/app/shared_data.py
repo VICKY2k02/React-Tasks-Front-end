@@ -13,3 +13,7 @@ attendance_access_requests = []
 attendance_records = [] 
 
 leave_requests = []
+
+suspension_requests = []
+
+reinstatement_requests = []

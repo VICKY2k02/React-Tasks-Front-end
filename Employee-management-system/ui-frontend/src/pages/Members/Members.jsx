@@ -7,7 +7,8 @@ import {
   // getUsers,
   deactivateUser,
   activateUser,
-  getMembers
+  getMembers,
+  suspendUser
 } from "../../services/MemberServices";
 
 import "./Members.css"
@@ -46,6 +47,8 @@ const Members = () => {
   }, []);
 
 
+  
+
 
   return (
 
@@ -82,49 +85,73 @@ const Members = () => {
 
               <td>{member.role}</td>
 
-              <td>{member.reactivation_status || "-"}</td>
-
              <td>
+                <span
+                  className={`status ${
+                    member.reactivation_status?.toLowerCase()
+                  }`}
+                >
+                  {member.reactivation_status || "-"}
+                </span>
+              </td>
 
-              {JSON.parse(localStorage.getItem("user"))?.email !== member.email && (
 
-                member.status === "Active" ? (
 
-                  <button
-                    className="deactivate-btn"
-                    onClick={async () => {
+              <td>
+                {JSON.parse(localStorage.getItem("user"))?.email !== member.email && (
 
-                      await deactivateUser(
-                        member.email
-                      );
+                  <>
+                    {member.status === "Active" && (
+                      <>
+                        <button
+                          className="deactivate-btn"
+                          onClick={async () => {
+                            await deactivateUser(member.email);
+                            loadMembers();
+                          }}
+                        >
+                          Deactivate
+                        </button>
 
-                      loadMembers();
-                    }}
-                  >
-                    Deactivate
-                  </button>
+                        <button
+                          className="suspend-btn"
+                          onClick={async () => {
+                            const reason = prompt(
+                              "Enter suspension reason"
+                            );
 
-                ) : (
+                            if (!reason) return;
 
-                  <button
-                    className="activate-btn"
-                    onClick={async () => {
+                            await suspendUser(
+                              member.email,
+                              reason
+                            );
 
-                      await activateUser(
-                        member.email
-                      );
+                            loadMembers();
+                          }}
+                        >
+                          Suspend
+                        </button>
+                      </>
+                    )}
 
-                      loadMembers();
-                    }}
-                  >
-                    Activate
-                  </button>
+                    {(member.status === "Deactivated" ||
+                      member.status === "Suspended") && (
+                      <button
+                        className="activate-btn"
+                        onClick={async () => {
+                          await activateUser(member.email);
+                          loadMembers();
+                        }}
+                      >
+                        Activate
+                      </button>
+                    )}
+                  </>
+                )}
+              </td>
 
-                )
-
-              )}
-
-            </td>
+           
 
               <td>{member.reason || "-"}</td>
             </tr>

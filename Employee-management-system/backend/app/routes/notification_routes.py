@@ -15,7 +15,7 @@ router = APIRouter()
 def get_notifications(email: str):
     return [
         n for n in notifications
-        if n["recipient_email"] == email
+        if n.get("recipient_email") == email
     ]
 
 

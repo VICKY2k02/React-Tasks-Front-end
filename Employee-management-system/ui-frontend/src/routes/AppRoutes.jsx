@@ -18,6 +18,8 @@ import AccountDeactivated from "../pages/Members/AccountDeactivated";
 import AuditLogs from "../pages/AuditLogs/AuditLogs";
 import ActivityTable from "../pages/ActivityTable";
 import DataExportCenter from "../pages/DataExportCenter";
+import AccountSuspended from "../pages/AccountSuspended";
+
 
 const AppRoutes = () => {
   const auth = useContext(AuthContext);
@@ -53,6 +55,12 @@ const AppRoutes = () => {
     <Route
       path="/account-deactivated"
       element={<AccountDeactivated />}
+    />
+
+
+    <Route
+      path="/account-suspended"
+      element={<AccountSuspended />}
     />
 
     {/* Protected Layout */}

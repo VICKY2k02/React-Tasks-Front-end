@@ -10,7 +10,7 @@ const getHeaders = () => {
   );
 
   return {
-    "company-id": user?.company_id
+    "company-id": user?.company_id,
   };
 };
 

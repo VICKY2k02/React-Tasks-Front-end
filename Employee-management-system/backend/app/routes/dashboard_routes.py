@@ -8,7 +8,8 @@ from app.shared_data import (
     notifications,
     reactivation_requests,
     leave_requests,
-    attendance_access_requests
+    attendance_access_requests,
+    suspension_requests
 )
 from app.routes.auth_routes import users
 
@@ -71,11 +72,26 @@ def get_dashboard_stats(
         and req["company_id"] == company_id
     ])
 
+    pending_reinstatement_requests = len([
+        req
+        for req in suspension_requests
+        if req["status"] == "Pending"
+        and next(
+            (
+                user for user in users
+                if user["email"] == req["email"]
+                and user["company_id"] == company_id
+            ),
+            None
+        )
+    ])
+
     pending_requests = (
         pending_role_requests +
         pending_reactivation_requests +
         pending_leave_requests +
-        pending_attendance_requests
+        pending_attendance_requests+
+        pending_reinstatement_requests
         # pending_attendance_requests
 
         # pending_reactivation_requests
@@ -85,7 +101,8 @@ def get_dashboard_stats(
         "totalEmployees": total_employees,
         "activeEmployees": active_employees,
         "departments": departments,
-        "pendingRequests": pending_requests
+        "pendingRequests": pending_requests,
+        "pendingReinstatement": pending_reinstatement_requests
     }
 
 
